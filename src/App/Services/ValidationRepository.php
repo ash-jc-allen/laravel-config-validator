@@ -26,7 +26,7 @@ class ValidationRepository
     {
         return [
             'rules'         => $this->rules,
-            'config_values' => $this->configValues
+            'config_values' => $this->configValues,
         ];
     }
 }
