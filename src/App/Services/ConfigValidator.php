@@ -10,12 +10,17 @@ use Symfony\Component\Finder\Finder;
 class ConfigValidator
 {
     /**
+     * The repository that holds the config values being
+     * validated, along with the rules and messages
+     * used for running the validation.
+     *
      * @var ValidationRepository
      */
     private $validationRepository;
 
     /**
      * ConfigValidator constructor.
+     *
      * @param  ValidationRepository|null  $validationRepository
      */
     public function __construct(ValidationRepository $validationRepository = null)
