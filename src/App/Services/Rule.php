@@ -14,6 +14,11 @@ class Rule
      */
     private $rules = [];
 
+    /**
+     * @var array
+     */
+    private $messages = [];
+
     public function __construct(string $fieldName)
     {
         $this->fieldName = $fieldName;
@@ -27,6 +32,13 @@ class Rule
     public function rules(array $rules)
     {
         $this->rules = array_merge($this->rules, $rules);
+
+        return $this;
+    }
+
+    public function messages(array $messages)
+    {
+        $this->messages = array_merge($this->messages, $messages);
 
         return $this;
     }
@@ -45,5 +57,13 @@ class Rule
     public function getRules(): array
     {
         return $this->rules;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMessages(): array
+    {
+        return $this->messages;
     }
 }
