@@ -93,7 +93,7 @@ class ConfigValidator
     {
         $ruleSet = $this->validationRepository->asArray();
 
-        $validator = Validator::make($ruleSet['config_values'], $ruleSet['rules']);
+        $validator = Validator::make($ruleSet['config_values'], $ruleSet['rules'], $ruleSet['messages']);
 
         if ($validator->fails()) {
             throw new InvalidConfigValueException($validator->errors()->first());

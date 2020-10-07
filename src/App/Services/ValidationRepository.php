@@ -8,6 +8,8 @@ class ValidationRepository
 
     private $rules = [];
 
+    private $messages = [];
+
     /**
      * @param  string  $key
      * @param  Rule[]  $rules
@@ -19,6 +21,10 @@ class ValidationRepository
 
             $this->rules[$configKey] = implode('|', $rule->getRules());
             $this->configValues[$key][$rule->getFieldName()] = config($configKey);
+
+            foreach ($rule->getMessages() as $messageField => $message) {
+                $this->messages[$configKey.'.'.$messageField] = $message;
+            }
         }
     }
 
@@ -26,6 +32,7 @@ class ValidationRepository
     {
         return [
             'rules'         => $this->rules,
+            'messages'      => $this->messages,
             'config_values' => $this->configValues,
         ];
     }
