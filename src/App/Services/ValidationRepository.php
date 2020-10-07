@@ -22,7 +22,7 @@ class ValidationRepository
             $this->rules[$configKey] = implode('|', $rule->getRules());
             $this->configValues[$key][$rule->getFieldName()] = config($configKey);
 
-            foreach($rule->getMessages() as $messageField => $message) {
+            foreach ($rule->getMessages() as $messageField => $message) {
                 $this->messages[$configKey.'.'.$messageField] = $message;
             }
         }
