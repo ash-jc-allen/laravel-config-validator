@@ -3,6 +3,7 @@
 namespace AshAllenDesign\ConfigValidator\App\Providers;
 
 use AshAllenDesign\ConfigValidator\App\Console\Commands\ValidateConfigCommand;
+use AshAllenDesign\ConfigValidator\App\Services\ConfigValidator;
 use Illuminate\Support\ServiceProvider;
 
 class ConfigValidatorProvider extends ServiceProvider
@@ -14,7 +15,7 @@ class ConfigValidatorProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        $this->app->alias(ConfigValidator::class, 'config-validator');
     }
 
     /**
