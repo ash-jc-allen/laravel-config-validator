@@ -19,12 +19,6 @@ class ValidationRepository
 
             $this->rules[$configKey] = implode('|', $rule->getRules());
             $this->configValues[$key][$rule->getFieldName()] = config($configKey);
-
-//            $this->rules[$configKey] = [
-//                'key' => $configKey,
-//                'value' => config($configKey),
-//                'rules' => implode('|', $rule->getRules())
-//            ];
         }
     }
 
