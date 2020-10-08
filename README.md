@@ -1,4 +1,6 @@
-# Laravel Config Validator
+<p align="center">
+<img src="https://ashallendesign.co.uk/images/custom/laravel-config-validator-logo.png" width="500">
+</p>
 
 ## Table of Contents
 
