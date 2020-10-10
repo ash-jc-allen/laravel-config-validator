@@ -13,7 +13,9 @@
         - [Ruleset Location](#ruleset-location)
         - [Adding Rules to a RuleSet](#adding-rules-to-a-ruleset)
         - [Custom Validation Error Messages](#custom-validation-error-messages)
-    - [Using the Command](#using-the-command)
+    - [Running the Validation](#running-the-validation)
+        - [Running the Validation Manually](#running-the-validation-manually)
+        - [Using the Command](#using-the-command)
 - [Security](#security)
 - [Contribution](#contribution)
 - [License](#license)
@@ -92,13 +94,58 @@ return [
 ];
 ```
 
-### Using the Command
+### Running the Validation
+
+#### Running the Validation Manually
+
+To run the config validation you can call the ``` ->run() ``` method on a ``` ConfigValidator ``` object. The example below
+shows how you could do this in a controller:
+
+```php
+<?php
+    
+namespace App\Http\Controllers;
+
+use AshAllenDesign\ConfigValidator\App\Services\ConfigValidator;
+
+class TestController extends Controller
+{
+    public function index()
+    {
+        $configValidator = new ConfigValidator();
+
+        $configValidator->run();
+
+        return response()->json(['success' => true]);
+    }
+}
+```
+
+If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
+into the ``` ->run() ``` method. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
+could use the following:
+
+```php
+$configValidator = new ConfigValidator();
+
+$configValidator->run('app/Custom/Validation');
+```
+
+#### Using the Command
 
 The library comes with a useful command that you can use to validate your config. To use it, you can run the following in
 the command line:
 
 ```bash
 php artisan config:validate
+```
+
+If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
+into the ``` --path ``` option. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
+could use the following:
+
+```bash
+php artisan config:validate --path=app/Custom/Validation
 ```
 
 ## Security
