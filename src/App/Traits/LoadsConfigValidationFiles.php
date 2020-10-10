@@ -11,23 +11,39 @@ trait LoadsConfigValidationFiles
      * Get all of the configuration validation files that
      * are set.
      *
+     * @param  string|null  $validationFolderPath
      * @return array
      */
-    private function getValidationFiles(): array
+    private function getValidationFiles(string $validationFolderPath = null): array
     {
         $files = [];
 
-        $configPath = realpath(app()->configPath('validation'));
+        $folderPath = $this->determineFolderPath($validationFolderPath);
 
-        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
-            $directory = $this->getNestedDirectory($file, $configPath);
+        foreach (Finder::create()->files()->name('*.php')->in($folderPath) as $file) {
+            $directory = $this->getNestedDirectory($file, $folderPath);
 
             $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
         }
 
-        ksort($files, SORT_NATURAL);
-
         return $files;
+    }
+
+    /**
+     * If a custom validation folder path has been set then
+     * get the full path. Otherwise, return the default
+     * path in the config/validation folder.
+     *
+     * @param  string|null  $validationFolderPath
+     * @return string
+     */
+    protected function determineFolderPath(string $validationFolderPath = null): string
+    {
+        if ($validationFolderPath) {
+            return realpath(app()->basePath($validationFolderPath));
+        }
+
+        return realpath(app()->configPath('validation'));
     }
 
     /**
