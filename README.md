@@ -16,6 +16,7 @@
     - [Running the Validation](#running-the-validation)
         - [Running the Validation Manually](#running-the-validation-manually)
         - [Using the Command](#using-the-command)
+    - [Facade](#facade)
 - [Security](#security)
 - [Contribution](#contribution)
 - [License](#license)
@@ -146,6 +147,31 @@ could use the following:
 
 ```bash
 php artisan config:validate --path=app/Custom/Validation
+```
+
+### Facade
+
+If you prefer to use facades in Laravel, you can choose to use the provided ``` ConfigValidator ``` facade instead of instantiating the ``` AshAllenDesign\ConfigValidator\Classes\ConfigValidator ```
+class manually.
+
+The example below shows an example of how you could use the facade to run the config validation:
+
+```php
+<?php
+    
+namespace App\Http\Controllers;
+
+use ConfigValidator;
+
+class TestController extends Controller
+{
+    public function index()
+    {
+        ConfigValidator::run();
+
+        return response()->json(['success' => true]);
+    }
+}
 ```
 
 ## Security
