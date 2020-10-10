@@ -43,7 +43,7 @@ class ValidateConfigCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return integer
+     * @return int
      */
     public function handle(): int
     {
