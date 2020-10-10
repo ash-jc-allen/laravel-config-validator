@@ -3,12 +3,13 @@
 namespace AshAllenDesign\ConfigValidator\App\Services;
 
 use AshAllenDesign\ConfigValidator\App\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\App\Traits\LoadsConfigValidationFiles;
 use Illuminate\Support\Facades\Validator;
-use SplFileInfo;
-use Symfony\Component\Finder\Finder;
 
 class ConfigValidator
 {
+    use LoadsConfigValidationFiles;
+
     /**
      * The repository that holds the config values being
      * validated, along with the rules and messages
@@ -45,47 +46,6 @@ class ConfigValidator
         }
 
         $this->runValidator();
-    }
-
-    /**
-     * Get all of the configuration validation files that
-     * are set.
-     *
-     * @return array
-     */
-    private function getValidationFiles(): array
-    {
-        $files = [];
-
-        $configPath = realpath(app()->configPath('validation'));
-
-        foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
-            $directory = $this->getNestedDirectory($file, $configPath);
-
-            $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
-        }
-
-        ksort($files, SORT_NATURAL);
-
-        return $files;
-    }
-
-    /**
-     * Get the configuration file nesting path.
-     *
-     * @param  SplFileInfo  $file
-     * @param  string  $configPath
-     * @return string
-     */
-    protected function getNestedDirectory(SplFileInfo $file, string $configPath): string
-    {
-        $directory = $file->getPath();
-
-        if ($nested = trim(str_replace($configPath, '', $directory), DIRECTORY_SEPARATOR)) {
-            $nested = str_replace(DIRECTORY_SEPARATOR, '.', $nested).'.';
-        }
-
-        return $nested;
     }
 
     /**
