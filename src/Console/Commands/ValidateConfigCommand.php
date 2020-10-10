@@ -1,9 +1,9 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Console\Commands;
+namespace AshAllenDesign\ConfigValidator\Console\Commands;
 
-use AshAllenDesign\ConfigValidator\App\Exceptions\InvalidConfigValueException;
-use AshAllenDesign\ConfigValidator\App\Services\ConfigValidator;
+use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 
 class ValidateConfigCommand extends Command

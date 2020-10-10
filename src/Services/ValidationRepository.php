@@ -1,6 +1,6 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Services;
+namespace AshAllenDesign\ConfigValidator\Services;
 
 class ValidationRepository
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Services;
+namespace AshAllenDesign\ConfigValidator\Services;
 
-use AshAllenDesign\ConfigValidator\App\Exceptions\InvalidConfigValueException;
-use AshAllenDesign\ConfigValidator\App\Traits\LoadsConfigValidationFiles;
+use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\Traits\LoadsConfigValidationFiles;
 use Illuminate\Support\Facades\Validator;
 
 class ConfigValidator

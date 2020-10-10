@@ -1,6 +1,6 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Traits;
+namespace AshAllenDesign\ConfigValidator\Traits;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
