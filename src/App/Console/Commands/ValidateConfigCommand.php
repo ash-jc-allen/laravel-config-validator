@@ -42,9 +42,9 @@ class ValidateConfigCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return integer
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Validating config...');
 
@@ -53,8 +53,12 @@ class ValidateConfigCommand extends Command
         } catch (InvalidConfigValueException $exception) {
             $this->error('Config validation failed!');
             $this->error($exception->getMessage());
+
+            return 1;
         }
 
         $this->info('Config validation passed!');
+
+        return 0;
     }
 }
