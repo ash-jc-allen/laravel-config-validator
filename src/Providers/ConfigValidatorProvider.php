@@ -1,9 +1,9 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Providers;
+namespace AshAllenDesign\ConfigValidator\Providers;
 
-use AshAllenDesign\ConfigValidator\App\Console\Commands\ValidateConfigCommand;
-use AshAllenDesign\ConfigValidator\App\Services\ConfigValidator;
+use AshAllenDesign\ConfigValidator\Console\Commands\ValidateConfigCommand;
+use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Support\ServiceProvider;
 
 class ConfigValidatorProvider extends ServiceProvider

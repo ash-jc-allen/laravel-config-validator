@@ -1,6 +1,6 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Facades;
+namespace AshAllenDesign\ConfigValidator\Facades;
 
 use Illuminate\Support\Facades\Facade;
 use RuntimeException;
@@ -8,7 +8,7 @@ use RuntimeException;
 /**
  * @method static void run()
  *
- * @see \AshAllenDesign\ConfigValidator\App\Services\ConfigValidator
+ * @see \AshAllenDesign\ConfigValidator\Services\ConfigValidator
  */
 class ConfigValidator extends Facade
 {

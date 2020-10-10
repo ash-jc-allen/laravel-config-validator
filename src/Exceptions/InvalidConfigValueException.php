@@ -1,6 +1,6 @@
 <?php
 
-namespace AshAllenDesign\ConfigValidator\App\Exceptions;
+namespace AshAllenDesign\ConfigValidator\Exceptions;
 
 use Exception;
 
