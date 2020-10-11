@@ -2,6 +2,13 @@
 <img src="https://ashallendesign.co.uk/images/custom/laravel-config-validator-logo.png" width="500">
 </p>
 
+<p align="center">
+<a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/v/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Latest Version on Packagist"></a>
+<a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/dt/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/php-v/ashallendesign/laravel-config-validator?style=flat-square" alt="PHP from Packagist"></a>
+<a href="https://github.com/ash-jc-allen/laravel-config-validator/blob/master/LICENSE"><img src="https://img.shields.io/github/license/ash-jc-allen/laravel-config-validator?style=flat-square" alt="GitHub license"></a>
+</p>
+
 ## Table of Contents
 
 - [Overview](#overview)
