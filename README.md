@@ -31,6 +31,7 @@
     - [Facade](#facade)
 - [Security](#security)
 - [Contribution](#contribution)
+- [Changelog](#changelog)
 - [License](#license)
 
 ## Overview
@@ -257,6 +258,10 @@ If you find any security related issues, please contact me directly at [mail@ash
 If you wish to make any changes or improvements to the package, feel free to make a pull request.
 
 Note: A contribution guide will be added soon.
+
+## Changelog
+
+Check the [CHANGELOG](CHANGELOG.md) to get more information about the latest changes.
 
 ## License
 
