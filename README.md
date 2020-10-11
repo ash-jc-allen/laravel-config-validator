@@ -15,7 +15,11 @@
         - [Custom Validation Error Messages](#custom-validation-error-messages)
     - [Running the Validation](#running-the-validation)
         - [Running the Validation Manually](#running-the-validation-manually)
+            - [Only Running on Selected Config Files](#only-running-on-selected-config-files)
+            - [Custom Folder Path](#custom-folder-path)
         - [Using the Command](#using-the-command)
+            - [Only Running on Selected Config Files (Command)](#only-running-on-selected-config-files-command)
+            - [Custom Folder Path (Command)](#custom-folder-path-command)
     - [Facade](#facade)
 - [Security](#security)
 - [Contribution](#contribution)
@@ -122,14 +126,28 @@ class TestController extends Controller
 }
 ```
 
+##### Only Running on Selected Config Files
+
+You might not always want to validate all of the config values in your application. So, you can specify the config files
+that you want to validate by passing the config names to the ``` ->run() ``` method as the first parameter. As an example, if you only wanted to validate
+the ``` auth.php ``` config file, you could use the following:
+
+```php
+$configValidator = new ConfigValidator();
+
+$configValidator->run(['auth']);
+```
+
+##### Custom Folder Path
+
 If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
-into the ``` ->run() ``` method. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
+into the ``` ->run() ``` method as the second parameter. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
 could use the following:
 
 ```php
 $configValidator = new ConfigValidator();
 
-$configValidator->run('app/Custom/Validation');
+$configValidator->run([], 'app/Custom/Validation');
 ```
 
 #### Using the Command
@@ -140,6 +158,24 @@ the command line:
 ```bash
 php artisan config:validate
 ```
+
+##### Only Running on Selected Config Files (Command)
+
+You might not always want to validate all of the config values in your application. So, you can specify the config files
+that you want to validate in the command using the ``` --files ``` option. As an example, if you only wanted to validate
+the ``` auth.php ``` config file, you could use the following:
+
+```bash
+php artisan config:validate --files=auth
+```
+
+As a further example, if you wanted to validate the ``` auth.php ``` and ``` app.php ``` files, you could use the following:
+
+```bash
+php artisan config:validate --files=auth,app
+```
+
+##### Custom Folder Path (Command)
 
 If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
 into the ``` --path ``` option. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
