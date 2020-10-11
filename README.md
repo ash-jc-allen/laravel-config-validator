@@ -20,6 +20,7 @@
         - [Ruleset Location](#ruleset-location)
         - [Adding Rules to a RuleSet](#adding-rules-to-a-ruleset)
         - [Custom Validation Error Messages](#custom-validation-error-messages)
+        - [Only Running in Specific App Environments](#only-running-in-specific-app-environments)
     - [Running the Validation](#running-the-validation)
         - [Running the Validation Manually](#running-the-validation-manually)
             - [Only Running on Selected Config Files](#only-running-on-selected-config-files)
@@ -78,7 +79,7 @@ file is a supported field. To do this, we could create a file at ``` config/vali
 ```php
 <?php
 
-use AshAllenDesign\ConfigValidator\App\Services\Rule;
+use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
     Rule::make('driver')->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array']),
@@ -98,13 +99,39 @@ file is a supported field and also use a custom error message. To do this, we co
 ```php
 <?php
 
-use AshAllenDesign\ConfigValidator\App\Services\Rule;
+use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
     Rule::make('driver')
         ->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array'])
         ->messages(['in' => 'The mail driver is invalid']),
     // ...
+];
+```
+
+#### Only Running in Specific App Environments
+
+You might not always want the same rule to be run in different environments. For example, you might want to have a relaxed
+set of validation rules for your local development environment and have a stricter set of rules for production.
+
+To explicitly specify the environment that a rule can be run in, you can use the ``` ->environments() ``` method. If no
+environment is defined, the rule will be run in all environments.
+
+The following example shows how you could set 2 different rules, one for production and one for local:
+
+```php
+<?php
+
+use AshAllenDesign\ConfigValidator\Services\Rule;
+
+return [
+    Rule::make('driver')
+        ->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array'])
+        ->environments([Rule::ENV_LOCAL]),
+    
+    Rule::make('driver')
+        ->rules(['in:mailgun'])
+        ->environments([Rule::ENV_PRODUCTION])
 ];
 ```
 
