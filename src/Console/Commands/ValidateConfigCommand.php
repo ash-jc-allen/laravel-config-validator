@@ -5,6 +5,7 @@ namespace AshAllenDesign\ConfigValidator\Console\Commands;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class ValidateConfigCommand extends Command
 {
@@ -51,7 +52,7 @@ class ValidateConfigCommand extends Command
         $this->info('Validating config...');
 
         try {
-            $this->configValidator->run($this->option('files'), $this->option('path'));
+            $this->configValidator->run($this->determineFilesToValidate(), $this->option('path'));
         } catch (InvalidConfigValueException $exception) {
             $this->error('Config validation failed!');
             $this->error($exception->getMessage());
@@ -62,5 +63,32 @@ class ValidateConfigCommand extends Command
         $this->info('Config validation passed!');
 
         return 0;
+    }
+
+    /**
+     * Determine the config files that should be validated.
+     * We do this by mapping any comma-separated 'files'
+     * inputs to an array of strings that can be
+     * passed to the ConfigValidator object.
+     *
+     * @return array
+     */
+    private function determineFilesToValidate(): array
+    {
+        $filesToValidate = [];
+
+        foreach ($this->option('files') as $fileOption) {
+            if (Str::contains($fileOption, ',')) {
+                $exploded = explode(',', $fileOption);
+
+                $filesToValidate = array_merge($filesToValidate, $exploded);
+
+                continue;
+            }
+
+            $filesToValidate = array_merge($filesToValidate, [$fileOption]);
+        }
+
+        return $filesToValidate;
     }
 }
