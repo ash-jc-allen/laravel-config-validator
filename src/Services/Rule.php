@@ -4,6 +4,12 @@ namespace AshAllenDesign\ConfigValidator\Services;
 
 class Rule
 {
+    const ENV_PRODUCTION = 'production';
+
+    const ENV_LOCAL = 'local';
+
+    const ENV_TESTING = 'testing';
+
     /**
      * The config field name being validated.
      *
@@ -25,6 +31,11 @@ class Rule
      * @var array
      */
     private $messages = [];
+
+    /**
+     * @var array
+     */
+    private $environments = [];
 
     /**
      * Rule constructor.
@@ -74,6 +85,13 @@ class Rule
         return $this;
     }
 
+    public function environments(array $environments): self
+    {
+        $this->environments = array_merge($this->environments, $environments);
+
+        return $this;
+    }
+
     /**
      * Get the config field name that this rule relates to.
      *
@@ -102,5 +120,15 @@ class Rule
     public function getMessages(): array
     {
         return $this->messages;
+    }
+
+    /**
+     * Get the app environments set within this rule.
+     *
+     * @return array
+     */
+    public function getEnvironments(): array
+    {
+        return $this->environments;
     }
 }
