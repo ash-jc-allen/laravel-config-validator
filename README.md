@@ -27,6 +27,7 @@
         - [Using the Command](#using-the-command)
             - [Only Running on Selected Config Files (Command)](#only-running-on-selected-config-files-command)
             - [Custom Folder Path (Command)](#custom-folder-path-command)
+        - [Using a Service Provider](#using-a-service-provider)
     - [Facade](#facade)
 - [Security](#security)
 - [Contribution](#contribution)
@@ -190,6 +191,36 @@ could use the following:
 
 ```bash
 php artisan config:validate --path=app/Custom/Validation
+```
+
+#### Using a Service Provider
+
+You might want to run the config validator automatically on each request to ensure that you have the correct config. This
+can be particularly useful if you are in a local environment and switching between Git branches often. However, you might
+not want it to always run automatically in production for performance reasons. To run the validation automatically on each
+request, you can add it to the ``` boot ``` method of a service provider.
+
+The example below shows how to only run the validation in the local environment using the ``` AppServiceProvider ```:
+
+```php
+<?php
+
+namespace App\Providers;
+
+use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function boot(ConfigValidator $configValidator)
+    {
+        if (App::environment() === 'local') {
+            $configValidator->run();
+        }
+    }
+}
+
 ```
 
 ### Facade
