@@ -42,10 +42,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "AshAllenDesign\\ConfigValidator\\App\\Providers\\ConfigValidatorProvider"
+        "AshAllenDesign\\ConfigValidator\\Providers\\ConfigValidatorProvider"
       ],
       "aliases": {
-        "ConfigValidator": "AshAllenDesign\\ConfigValidator\\App\\Facades\\ConfigValidator"
+        "ConfigValidator": "AshAllenDesign\\ConfigValidator\\Facades\\ConfigValidator"
       }
     }
   }
