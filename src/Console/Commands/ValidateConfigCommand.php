@@ -14,6 +14,7 @@ class ValidateConfigCommand extends Command
      * @var string
      */
     protected $signature = 'config:validate
+                            {--files=* : The config files that should be validated.}
                             {--path= : The path of the folder where the validation files are location.}';
 
     /**
@@ -50,7 +51,7 @@ class ValidateConfigCommand extends Command
         $this->info('Validating config...');
 
         try {
-            $this->configValidator->run($this->option('path'));
+            $this->configValidator->run($this->option('files'), $this->option('path'));
         } catch (InvalidConfigValueException $exception) {
             $this->error('Config validation failed!');
             $this->error($exception->getMessage());
