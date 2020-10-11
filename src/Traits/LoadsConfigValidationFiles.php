@@ -11,16 +11,18 @@ trait LoadsConfigValidationFiles
      * Get all of the configuration validation files that
      * are set.
      *
+     * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
      * @return array
      */
-    private function getValidationFiles(string $validationFolderPath = null): array
+    private function getValidationFiles(array $configFiles = [], string $validationFolderPath = null): array
     {
         $files = [];
 
         $folderPath = $this->determineFolderPath($validationFolderPath);
+        $configFileNames = $this->determineFilesToRead($configFiles);
 
-        foreach (Finder::create()->files()->name('*.php')->in($folderPath) as $file) {
+        foreach (Finder::create()->files()->name($configFileNames)->in($folderPath) as $file) {
             $directory = $this->getNestedDirectory($file, $folderPath);
 
             $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
@@ -62,5 +64,26 @@ trait LoadsConfigValidationFiles
         }
 
         return $nested;
+    }
+
+    /**
+     * If the no specific files were defined, we will read
+     * all of the files in the directory. Otherwise, we
+     * only read the files specified. For example, if
+     * ['cache', 'auth'] were passed in, we would
+     * return ['cache.php', 'auth.php'].
+     *
+     * @param  array  $configFiles
+     * @return string[]
+     */
+    protected function determineFilesToRead(array $configFiles = []): array
+    {
+        if (empty($configFiles)) {
+            return ['*.php'];
+        }
+
+        return array_map(function ($configValue) {
+            return $configValue.'.php';
+        }, $configFiles);
     }
 }

@@ -33,12 +33,13 @@ class ConfigValidator
      * Handle the loading of the config validation files
      * and then validate the config.
      *
+     * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
      * @throws InvalidConfigValueException
      */
-    public function run(string $validationFolderPath = null): void
+    public function run(array $configFiles = [], string $validationFolderPath = null): void
     {
-        $validationFiles = $this->getValidationFiles($validationFolderPath);
+        $validationFiles = $this->getValidationFiles($configFiles, $validationFolderPath);
 
         foreach ($validationFiles as $key => $path) {
             $ruleSet = require $path;
