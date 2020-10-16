@@ -49,7 +49,11 @@ class ValidationRepository
             $configKey = $key.'.'.$rule->getFieldName();
 
             $this->rules[$configKey] = implode('|', $rule->getRules());
-            $this->configValues[$key][$rule->getFieldName()] = config($configKey);
+
+            $hydrated = $this->hydrateConfigValueArray($key, $rule);
+            $field = array_keys($hydrated)[0];
+
+            $this->configValues[$key][$field] = $this->hydrateConfigValueArray($key, $rule)[$field];
 
             foreach ($rule->getMessages() as $messageField => $message) {
                 $this->messages[$configKey.'.'.$messageField] = $message;
@@ -92,5 +96,36 @@ class ValidationRepository
         }
 
         return in_array(app()->environment(), $environments);
+    }
+
+    /**
+     * This takes a config field and hydrates it into a
+     * nested array that we can validate against. For
+     * example, we can use it convert the config
+     * item 'mail.from.address' that is equal
+     * to 'example@domain.com' to this...
+     *
+     * [
+     *     'mail' => [
+     *         'from' => [
+     *             'address' => 'example@domain.com'
+     *         ]
+     *     ]
+     * ]
+     *
+     * @param  string  $configKey
+     * @param  Rule  $rule
+     * @return array
+     */
+    private function hydrateConfigValueArray(string $configKey, Rule $rule): array
+    {
+        $keys = explode('.', $rule->getFieldName());
+        $value = config($configKey.'.'.$rule->getFieldName());
+
+        while ($key = array_pop($keys)) {
+            $value = [$key => $value];
+        }
+
+        return $value;
     }
 }
