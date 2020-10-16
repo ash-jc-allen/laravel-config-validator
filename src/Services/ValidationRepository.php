@@ -103,7 +103,7 @@ class ValidationRepository
      * nested array that we can validate against. For
      * example, we can use it convert the config
      * item 'mail.from.address' that is equal
-     * to 'example@domain.com' to this:
+     * to 'example@domain.com' to this...
      *
      * [
      *     'mail' => [
