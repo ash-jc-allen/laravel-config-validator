@@ -2,7 +2,7 @@
 
 namespace AshAllenDesign\ConfigValidator\Console\Commands;
 
-use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\Exceptions\ConfigValidatorException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -53,7 +53,7 @@ class ValidateConfigCommand extends Command
 
         try {
             $this->configValidator->run($this->determineFilesToValidate(), $this->option('path'));
-        } catch (InvalidConfigValueException $exception) {
+        } catch (ConfigValidatorException $exception) {
             $this->error('Config validation failed!');
             $this->error($exception->getMessage());
 

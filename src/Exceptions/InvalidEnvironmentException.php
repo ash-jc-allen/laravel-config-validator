@@ -2,8 +2,6 @@
 
 namespace AshAllenDesign\ConfigValidator\Exceptions;
 
-use Exception;
-
-class InvalidEnvironmentException extends Exception
+class InvalidEnvironmentException extends ConfigValidatorException
 {
 }
