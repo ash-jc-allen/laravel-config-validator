@@ -2,6 +2,8 @@
 
 namespace AshAllenDesign\ConfigValidator\Traits;
 
+use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -14,6 +16,7 @@ trait LoadsConfigValidationFiles
      * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
      * @return array
+     * @throws DirectoryNotFoundException
      */
     private function getValidationFiles(array $configFiles = [], string $validationFolderPath = null): array
     {
@@ -34,18 +37,25 @@ trait LoadsConfigValidationFiles
     /**
      * If a custom validation folder path has been set then
      * get the full path. Otherwise, return the default
-     * path in the config/validation folder.
+     * path in the config/validation folder. If the
+     * folder does not exist, an exception will
+     * be thrown.
      *
      * @param  string|null  $validationFolderPath
      * @return string
+     * @throws DirectoryNotFoundException
      */
     protected function determineFolderPath(string $validationFolderPath = null): string
     {
-        if ($validationFolderPath) {
-            return realpath(app()->basePath($validationFolderPath));
+        $path = $validationFolderPath
+            ? app()->basePath($validationFolderPath)
+            : app()->configPath('validation');
+
+        if ($folderPath = realpath($path)) {
+            return $folderPath;
         }
 
-        return realpath(app()->configPath('validation'));
+        throw new DirectoryNotFoundException('The directory '.$path.' does not exist.');
     }
 
     /**
