@@ -2,8 +2,6 @@
 
 namespace AshAllenDesign\ConfigValidator\Exceptions;
 
-use Exception;
-
-class DirectoryNotFoundException extends Exception
+class DirectoryNotFoundException extends ConfigValidatorException
 {
 }

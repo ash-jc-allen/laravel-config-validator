@@ -30,7 +30,7 @@ trait LoadsConfigValidationFiles
         $configValidationFiles = Finder::create()->files()->name($configFileNames)->in($folderPath);
 
         if (! $configValidationFiles->count()) {
-            throw new NoValidationFilesFoundException('No validation files were found inside the directory.');
+            throw new NoValidationFilesFoundException('No config validation files were found inside the directory.');
         }
 
         foreach ($configValidationFiles as $file) {
