@@ -4,7 +4,6 @@ namespace AshAllenDesign\ConfigValidator\Traits;
 
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
-use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
