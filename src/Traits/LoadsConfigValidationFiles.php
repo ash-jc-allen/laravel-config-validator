@@ -3,6 +3,7 @@
 namespace AshAllenDesign\ConfigValidator\Traits;
 
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
+use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -17,6 +18,7 @@ trait LoadsConfigValidationFiles
      * @param  string|null  $validationFolderPath
      * @return array
      * @throws DirectoryNotFoundException
+     * @throws NoValidationFilesFoundException
      */
     private function getValidationFiles(array $configFiles = [], string $validationFolderPath = null): array
     {
@@ -25,7 +27,13 @@ trait LoadsConfigValidationFiles
         $folderPath = $this->determineFolderPath($validationFolderPath);
         $configFileNames = $this->determineFilesToRead($configFiles);
 
-        foreach (Finder::create()->files()->name($configFileNames)->in($folderPath) as $file) {
+        $configValidationFiles = Finder::create()->files()->name($configFileNames)->in($folderPath);
+
+        if (! $configValidationFiles->count()) {
+            throw new NoValidationFilesFoundException('No validation files were found inside the directory.');
+        }
+
+        foreach ($configValidationFiles as $file) {
             $directory = $this->getNestedDirectory($file, $folderPath);
 
             $files[$directory.basename($file->getRealPath(), '.php')] = $file->getRealPath();
