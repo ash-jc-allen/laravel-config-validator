@@ -44,7 +44,7 @@ A Laravel package that allows you to validate your config values and environment
 ### Requirements
 The package has been developed and tested to work with the following minimum requirements:
 
-- PHP 7.2
+- PHP 7.3
 - Laravel 6
 
 ### Install the Package
