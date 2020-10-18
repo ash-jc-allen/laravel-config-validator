@@ -2,7 +2,9 @@
 
 namespace AshAllenDesign\ConfigValidator\Services;
 
+use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Traits\LoadsConfigValidationFiles;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,9 +37,12 @@ class ConfigValidator
      *
      * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
+     * @return bool
      * @throws InvalidConfigValueException
+     * @throws DirectoryNotFoundException
+     * @throws NoValidationFilesFoundException
      */
-    public function run(array $configFiles = [], string $validationFolderPath = null): void
+    public function run(array $configFiles = [], string $validationFolderPath = null): bool
     {
         $validationFiles = $this->getValidationFiles($configFiles, $validationFolderPath);
 
@@ -47,16 +52,17 @@ class ConfigValidator
             $this->validationRepository->push($key, $ruleSet);
         }
 
-        $this->runValidator();
+        return $this->runValidator();
     }
 
     /**
      * Validate the config values against the config rules
      * that have been set.
      *
+     * @return bool
      * @throws InvalidConfigValueException
      */
-    private function runValidator(): void
+    private function runValidator(): bool
     {
         $ruleSet = $this->validationRepository->asArray();
 
@@ -65,5 +71,7 @@ class ConfigValidator
         if ($validator->fails()) {
             throw new InvalidConfigValueException($validator->errors()->first());
         }
+
+        return true;
     }
 }
