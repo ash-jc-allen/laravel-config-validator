@@ -5,6 +5,7 @@ namespace AshAllenDesign\ConfigValidator\Tests\Unit\Console\Commands\ValidateCon
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 class HandleTest extends TestCase
@@ -12,6 +13,8 @@ class HandleTest extends TestCase
     /** @test */
     public function command_can_be_run()
     {
+        Config::set('cache.default', 'array');
+
         $this->createMockValidationFile();
 
         Artisan::call('config:validate');
@@ -42,13 +45,16 @@ class HandleTest extends TestCase
 
     private function createMockValidationFile()
     {
-        $stubFilePath = __DIR__.'/../../../Stubs/Valid/cache.php';
-
-        if (file_exists(config_path('validation'))) {
-            rmdir(config_path('validation'));
-        }
+        $stubFilePath = __DIR__.'/../../../Stubs/cache.php';
 
         File::makeDirectory(config_path('validation'));
         File::put(config_path('validation/cache.php'), file_get_contents($stubFilePath));
+    }
+
+    protected function tearDown(): void
+    {
+        File::deleteDirectory(config_path('validation'));
+
+        parent::tearDown();
     }
 }
