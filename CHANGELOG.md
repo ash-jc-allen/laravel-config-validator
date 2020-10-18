@@ -1,5 +1,11 @@
 # Changelog
 
+**v0.4.0:**
+- Increased minimum supported PHP version to PHP 7.3.
+- Added PHPUnit tests.
+- Fixed a bug that prevented more than one nested config item from being validated.
+- Updated the validator to return ``` true ``` after successfully running.
+
 **v0.3.0:**
 - Added checks that validate whether if the config folder exists and if the folder contains any validation files.
 
