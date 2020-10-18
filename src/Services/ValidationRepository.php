@@ -48,13 +48,13 @@ class ValidationRepository
 
             $configKey = $key.'.'.$rule->getFieldName();
 
+            // Add the rules for the field to the repository.
             $this->rules[$configKey] = implode('|', $rule->getRules());
 
-            $hydrated = $this->hydrateConfigValueArray($key, $rule);
-            $field = array_keys($hydrated)[0];
+            // Add the current config values for the field to the repository.
+            $this->fetchCurrentConfigValues($key, $rule);
 
-            $this->configValues[$key][$field] = $this->hydrateConfigValueArray($key, $rule)[$field];
-
+            // Add any custom messages for the field to the repository.
             foreach ($rule->getMessages() as $messageField => $message) {
                 $this->messages[$configKey.'.'.$messageField] = $message;
             }
@@ -127,5 +127,31 @@ class ValidationRepository
         }
 
         return $value;
+    }
+
+    /**
+     * Fetch the current config values that are set in the
+     * system and then add them to the repository for
+     * validating.
+     *
+     * @param  string  $key
+     * @param  Rule  $rule
+     */
+    private function fetchCurrentConfigValues(string $key, Rule $rule): void
+    {
+        $hydrated = $this->hydrateConfigValueArray($key, $rule);
+        $field = array_keys($hydrated)[0];
+
+        if (empty($this->configValues[$key][$field])) {
+            $this->configValues[$key][$field] = [];
+        }
+
+        // If the config value is nested (e.g. mail.from.address) then we add
+        // it differently to standard non-nested fields.
+        if (is_array($hydrated[$field])) {
+            $this->configValues[$key][$field] += $hydrated[$field];
+        } else {
+            $this->configValues[$key][array_key_first($hydrated)] = $hydrated[array_key_first($hydrated)];
+        }
     }
 }
