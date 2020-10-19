@@ -3,6 +3,7 @@
 namespace AshAllenDesign\ConfigValidator\Providers;
 
 use AshAllenDesign\ConfigValidator\Console\Commands\ValidateConfigCommand;
+use AshAllenDesign\ConfigValidator\Console\Commands\ValidationMakeCommand;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,7 @@ class ConfigValidatorProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ValidateConfigCommand::class,
+                ValidationMakeCommand::class,
             ]);
         }
     }
