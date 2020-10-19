@@ -17,6 +17,7 @@
     - [Install the Package](#install-the-package)
 - [Usage](#usage)
     - [Creating a Validation Ruleset](#creating-a-validation-ruleset)
+        - [Using the Generator Command](#using-the-generator-command)
         - [Ruleset Location](#ruleset-location)
         - [Adding Rules to a RuleSet](#adding-rules-to-a-ruleset)
         - [Custom Validation Error Messages](#custom-validation-error-messages)
@@ -57,6 +58,19 @@ composer require ashallendesign/laravel-config-validator
 ## Usage
 
 ### Creating a Validation Ruleset
+
+#### Using the Generator Command
+
+This package comes with a command that you can use to quickly create a validation file to get you started right away.
+Lets say that you wanted to create a validation file for validating the config in the ``` config/app.php ``` file. To do
+this, you could use the following command:
+
+```bash
+php artisan make:config-validation app
+```
+
+Running the above command would create a file in ``` config/validation/app.php ``` ready for you to start adding your config
+validation.
 
 #### Ruleset Location
 
