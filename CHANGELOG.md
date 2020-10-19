@@ -1,5 +1,9 @@
 # Changelog
 
+**v1.0.0:**
+- Initial production release.
+- Added a generator command that can be used for making new config validation files.
+
 **v0.4.0:**
 - Increased minimum supported PHP version to PHP 7.3.
 - Added PHPUnit tests.
