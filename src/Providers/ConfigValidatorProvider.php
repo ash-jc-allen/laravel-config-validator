@@ -29,7 +29,7 @@ class ConfigValidatorProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ValidateConfigCommand::class,
-                ValidationMakeCommand::class
+                ValidationMakeCommand::class,
             ]);
         }
     }
