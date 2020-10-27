@@ -29,6 +29,14 @@ class ConfigValidator
     private $errors = [];
 
     /**
+     * Specifies whether if an exception should be thrown
+     * if the config validation fails.
+     *
+     * @var bool
+     */
+    private $throwExceptionOnFailure = true;
+
+    /**
      * ConfigValidator constructor.
      *
      * @param  ValidationRepository|null  $validationRepository
@@ -46,6 +54,20 @@ class ConfigValidator
     public function errors(): array
     {
         return $this->errors;
+    }
+
+    /**
+     * Determine whether an exception should be thrown if
+     * the validation fails.
+     *
+     * @param  bool  $throwException
+     * @return ConfigValidator
+     */
+    public function throwExceptionOnFailure(bool $throwException = true): self
+    {
+        $this->throwExceptionOnFailure = $throwException;
+
+        return $this;
     }
 
     /**
@@ -74,7 +96,10 @@ class ConfigValidator
 
     /**
      * Validate the config values against the config rules
-     * that have been set.
+     * that have been set. If throwExceptionOnFailure is
+     * set to true, the validator's first error message
+     * will be used as the message in the thrown
+     * exception.
      *
      * @return bool
      * @throws InvalidConfigValueException
@@ -88,7 +113,11 @@ class ConfigValidator
         if ($validator->fails()) {
             $this->errors = $validator->errors()->messages();
 
-            throw new InvalidConfigValueException($validator->errors()->first());
+            if ($this->throwExceptionOnFailure) {
+                throw new InvalidConfigValueException($validator->errors()->first());
+            }
+
+            return false;
         }
 
         return true;
