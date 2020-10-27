@@ -22,6 +22,13 @@ class ConfigValidator
     private $validationRepository;
 
     /**
+     * An array of the validation error messages.
+     *
+     * @var array
+     */
+    private $errors = [];
+
+    /**
      * ConfigValidator constructor.
      *
      * @param  ValidationRepository|null  $validationRepository
@@ -29,6 +36,16 @@ class ConfigValidator
     public function __construct(ValidationRepository $validationRepository = null)
     {
         $this->validationRepository = $validationRepository ?? new ValidationRepository();
+    }
+
+    /**
+     * Return the validation error messages.
+     *
+     * @return array
+     */
+    public function errors(): array
+    {
+        return $this->errors;
     }
 
     /**
@@ -69,6 +86,8 @@ class ConfigValidator
         $validator = Validator::make($ruleSet['config_values'], $ruleSet['rules'], $ruleSet['messages']);
 
         if ($validator->fails()) {
+            $this->errors = $validator->errors()->messages();
+
             throw new InvalidConfigValueException($validator->errors()->first());
         }
 
