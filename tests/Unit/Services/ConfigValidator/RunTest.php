@@ -174,7 +174,7 @@ class RunTest extends TestCase
             ],
             'mail.port'     => [
                 'The mail.port must be an integer.',
-            ]
+            ],
         ], $configValidator->errors());
     }
 
