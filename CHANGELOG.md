@@ -2,7 +2,7 @@
 
 **v1.1.0 (released 2020-10-28):**
 - Added a new ` errors() `  method to the ` ConfigValidator ` class. [#22](https://github.com/ash-jc-allen/laravel-config-validator/pull/22)
-- Added a new ` throwExceptionOnFailure ` method to the ` ConfigValidator ` class. [#23](https://github.com/ash-jc-allen/laravel-config-validator/pull/23)
+- Added a new ` throwExceptionOnFailure() ` method to the ` ConfigValidator ` class. [#23](https://github.com/ash-jc-allen/laravel-config-validator/pull/23)
 - Updated the validation console command output to be more readable and contain all the validation error messages. [#24](https://github.com/ash-jc-allen/laravel-config-validator/pull/23)
 
 **v1.0.0:**
