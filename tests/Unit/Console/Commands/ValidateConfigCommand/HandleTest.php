@@ -25,7 +25,9 @@ class HandleTest extends TestCase
     public function command_can_be_run_with_the_path_option()
     {
         $this->mock(ConfigValidator::class, function ($mock) {
+            $mock->shouldReceive('throwExceptionOnFailure')->withArgs([false])->andReturn($mock);
             $mock->shouldReceive('run')->withArgs([[], 'hello']);
+            $mock->shouldReceive('errors')->withNoArgs()->andReturn([]);
         });
 
         Artisan::call('config:validate --path=hello');
@@ -36,7 +38,9 @@ class HandleTest extends TestCase
     public function command_can_be_run_with_the_files_option()
     {
         $this->mock(ConfigValidator::class, function ($mock) {
+            $mock->shouldReceive('throwExceptionOnFailure')->withArgs([false])->andReturn($mock);
             $mock->shouldReceive('run')->withArgs([['auth', 'mail', 'telescope'], null]);
+            $mock->shouldReceive('errors')->withNoArgs()->andReturn([]);
         });
 
         Artisan::call('config:validate --files=auth,mail,telescope');

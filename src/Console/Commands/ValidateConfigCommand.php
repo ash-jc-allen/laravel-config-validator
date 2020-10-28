@@ -2,13 +2,22 @@
 
 namespace AshAllenDesign\ConfigValidator\Console\Commands;
 
-use AshAllenDesign\ConfigValidator\Exceptions\ConfigValidatorException;
+use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
+use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
+use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Helper\TableSeparator;
 
 class ValidateConfigCommand extends Command
 {
+    const ERROR_TABLE_HEADERS = [
+        'Config Field',
+        'Config Value',
+        'Error',
+    ];
+
     /**
      * The name and signature of the console command.
      *
@@ -26,6 +35,8 @@ class ValidateConfigCommand extends Command
     protected $description = 'Validate the application config.';
 
     /**
+     * The object that is used for validating the config.
+     *
      * @var ConfigValidator
      */
     private $configValidator;
@@ -46,16 +57,20 @@ class ValidateConfigCommand extends Command
      * Execute the console command.
      *
      * @return int
+     * @throws DirectoryNotFoundException
+     * @throws InvalidConfigValueException
+     * @throws NoValidationFilesFoundException
      */
     public function handle(): int
     {
         $this->info('Validating config...');
 
-        try {
-            $this->configValidator->run($this->determineFilesToValidate(), $this->option('path'));
-        } catch (ConfigValidatorException $exception) {
-            $this->error('Config validation failed!');
-            $this->error($exception->getMessage());
+        $this->configValidator
+            ->throwExceptionOnFailure(false)
+            ->run($this->determineFilesToValidate(), $this->option('path'));
+
+        if (! empty($this->configValidator->errors())) {
+            $this->buildErrorOutput();
 
             return 1;
         }
@@ -90,5 +105,31 @@ class ValidateConfigCommand extends Command
         }
 
         return $filesToValidate;
+    }
+
+    /**
+     * Build up the console output to show the errors. We
+     * output the errors in a table.
+     */
+    private function buildErrorOutput(): void
+    {
+        $rows = [];
+
+        foreach ($this->configValidator->errors() as $configField => $errors) {
+            foreach ($errors as $error) {
+                $rows[] = [
+                    $configField,
+                    config($configField),
+                    $error,
+                ];
+            }
+
+            if ($configField !== array_key_last($this->configValidator->errors())) {
+                array_push($rows, [new TableSeparator(['colspan' => 3])]);
+            }
+        }
+
+        $this->error('Config validation failed!');
+        $this->table(self::ERROR_TABLE_HEADERS, $rows);
     }
 }

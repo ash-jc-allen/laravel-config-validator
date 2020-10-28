@@ -22,6 +22,21 @@ class ConfigValidator
     private $validationRepository;
 
     /**
+     * An array of the validation error messages.
+     *
+     * @var array
+     */
+    private $errors = [];
+
+    /**
+     * Specifies whether if an exception should be thrown
+     * if the config validation fails.
+     *
+     * @var bool
+     */
+    private $throwExceptionOnFailure = true;
+
+    /**
      * ConfigValidator constructor.
      *
      * @param  ValidationRepository|null  $validationRepository
@@ -29,6 +44,30 @@ class ConfigValidator
     public function __construct(ValidationRepository $validationRepository = null)
     {
         $this->validationRepository = $validationRepository ?? new ValidationRepository();
+    }
+
+    /**
+     * Return the validation error messages.
+     *
+     * @return array
+     */
+    public function errors(): array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Determine whether an exception should be thrown if
+     * the validation fails.
+     *
+     * @param  bool  $throwException
+     * @return ConfigValidator
+     */
+    public function throwExceptionOnFailure(bool $throwException = true): self
+    {
+        $this->throwExceptionOnFailure = $throwException;
+
+        return $this;
     }
 
     /**
@@ -57,7 +96,10 @@ class ConfigValidator
 
     /**
      * Validate the config values against the config rules
-     * that have been set.
+     * that have been set. If throwExceptionOnFailure is
+     * set to true, the validator's first error message
+     * will be used as the message in the thrown
+     * exception.
      *
      * @return bool
      * @throws InvalidConfigValueException
@@ -69,7 +111,13 @@ class ConfigValidator
         $validator = Validator::make($ruleSet['config_values'], $ruleSet['rules'], $ruleSet['messages']);
 
         if ($validator->fails()) {
-            throw new InvalidConfigValueException($validator->errors()->first());
+            $this->errors = $validator->errors()->messages();
+
+            if ($this->throwExceptionOnFailure) {
+                throw new InvalidConfigValueException($validator->errors()->first());
+            }
+
+            return false;
         }
 
         return true;

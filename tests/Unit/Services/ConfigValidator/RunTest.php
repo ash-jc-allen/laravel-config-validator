@@ -93,7 +93,7 @@ class RunTest extends TestCase
         File::put(config_path('validation/mail.php'), file_get_contents($stubFilePath));
 
         $configValidator = new ConfigValidator();
-        $configValidator->run();
+        $configValidator->throwExceptionOnFailure(true)->run();
     }
 
     /** @test */
@@ -135,6 +135,62 @@ class RunTest extends TestCase
 
         $configValidator = new ConfigValidator();
         $configValidator->run();
+    }
+
+    /** @test */
+    public function validation_error_messages_can_be_returned()
+    {
+        // Set valid config values that will pass all of the validation rules.
+        Config::set('mail.from.address', 'mail@ashallendesign.co.uk');
+        Config::set('mail.from.to', 'Ashley Allen');
+        Config::set('mail.host', 'a random string');
+
+        // Set invalid config values that will have their error messages stored.
+        Config::set('cache.default', null);
+        Config::set('mail.port', 'INVALID');
+
+        $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
+        $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
+
+        File::makeDirectory(config_path('validation'));
+        File::put(config_path('validation/mail.php'), file_get_contents($mailStubFilePath));
+        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+
+        $configValidator = new ConfigValidator();
+
+        $this->assertEquals([], $configValidator->errors());
+
+        try {
+            $configValidator->run();
+        } catch (InvalidConfigValueException $e) {
+            // Suppress the exception so that we can continue
+            // testing the error output.
+        }
+
+        $this->assertEquals([
+            'cache.default' => [
+                'The cache.default must be a string.',
+                'The cache.default field is required.',
+            ],
+            'mail.port'     => [
+                'The mail.port must be an integer.',
+            ],
+        ], $configValidator->errors());
+    }
+
+    /** @test */
+    public function exception_is_not_thrown_if_it_is_disabled_before_running_the_validator()
+    {
+        // Set invalid config values that will have their error messages stored.
+        Config::set('cache.default', null);
+
+        $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
+
+        File::makeDirectory(config_path('validation'));
+        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+
+        $configValidator = new ConfigValidator();
+        $this->assertFalse($configValidator->throwExceptionOnFailure(false)->run());
     }
 
     protected function tearDown(): void

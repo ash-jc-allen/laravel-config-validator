@@ -30,6 +30,7 @@
             - [Only Running on Selected Config Files (Command)](#only-running-on-selected-config-files-command)
             - [Custom Folder Path (Command)](#custom-folder-path-command)
         - [Using a Service Provider](#using-a-service-provider)
+        - [Throwing and Preventing Exceptions](#throwing-and-preventing-exceptions)
     - [Facade](#facade)
 - [Security](#security)
 - [Contribution](#contribution)
@@ -161,7 +162,7 @@ shows how you could do this in a controller:
     
 namespace App\Http\Controllers;
 
-use AshAllenDesign\ConfigValidator\App\Services\ConfigValidator;
+use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 
 class TestController extends Controller
 {
@@ -263,6 +264,25 @@ class AppServiceProvider extends ServiceProvider
     }
 }
 
+```
+
+#### Throwing and Preventing Exceptions
+
+By default, the ` ConfigValidator ` will throw an ` InvalidConfigValueException ` exception if the validation fails. The exception will contain
+the error message of the first config value that failed the validation. You can prevent the exception from being thrown and instead
+rely on the boolean return value of the ` ->run() ` method by using the ` ->throwExceptionOnFailure() ` method.
+
+By preventing any exceptions from being thrown, it makes it easier for you to get all the failed validation errors using the
+` ->errors() ` method. This will return the errors as an array.
+
+The example belows shows how you could prevent any exceptions from being thrown so that you can grab the errors:
+
+```php
+$configValidator = new ConfigValidator();
+
+$errors = $configValidator->throwExceptionOnFailure(false)
+                ->run()
+                ->errors();
 ```
 
 ### Facade
