@@ -15,7 +15,7 @@ class ValidateConfigCommand extends Command
     const ERROR_TABLE_HEADERS = [
         'Config Field',
         'Config Value',
-        'Error'
+        'Error',
     ];
 
     /**
