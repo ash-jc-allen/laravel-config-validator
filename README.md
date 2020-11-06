@@ -4,6 +4,7 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/v/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Latest Version on Packagist"></a>
+<a href="https://travis-ci.org/ash-jc-allen/laravel-config-validator"><img src="https://img.shields.io/travis/ash-jc-allen/laravel-config-validator/master.svg?style=flat-square" alt="Build Status"></a>
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/dt/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/php-v/ashallendesign/laravel-config-validator?style=flat-square" alt="PHP from Packagist"></a>
 <a href="https://github.com/ash-jc-allen/laravel-config-validator/blob/master/LICENSE"><img src="https://img.shields.io/github/license/ash-jc-allen/laravel-config-validator?style=flat-square" alt="GitHub license"></a>
@@ -15,6 +16,7 @@
 - [Installation](#installation)
     - [Requirements](#requirements)
     - [Install the Package](#install-the-package)
+    - [Publishing the Default Rulesets](#publishing-the-default-rulesets)
 - [Usage](#usage)
     - [Creating a Validation Ruleset](#creating-a-validation-ruleset)
         - [Using the Generator Command](#using-the-generator-command)
@@ -55,6 +57,19 @@ You can install the package via Composer:
 ```bash
 composer require ashallendesign/laravel-config-validator
 ```
+
+### Publishing the Default Rulesets
+
+To get you started with validating your apps config, Laravel Config Validator comes with some default rulesets. To start
+using these rulesets, you can publish them using the following command:
+
+```bash
+php artisan vendor:publish --tag=config-validator-defaults
+```
+
+The above command will copy the validation files and place in a ` config/validation ` folder in your project. These rules
+are just to get you started, so there are likely going to be rule in the files that don't apply to your app. So, once you've
+published them, feel free to delete them or edit them as much as you'd like.
 
 ## Usage
 

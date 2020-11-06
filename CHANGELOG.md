@@ -1,5 +1,8 @@
 # Changelog
 
+**v1.2.0 (released 2020-11-06):**
+- Added default config rulesets that can be published. [#26](https://github.com/ash-jc-allen/laravel-config-validator/pull/26)
+
 **v1.1.0 (released 2020-10-28):**
 - Added a new ` errors() `  method to the ` ConfigValidator ` class. [#22](https://github.com/ash-jc-allen/laravel-config-validator/pull/22)
 - Added a new ` throwExceptionOnFailure() ` method to the ` ConfigValidator ` class. [#23](https://github.com/ash-jc-allen/laravel-config-validator/pull/23)
