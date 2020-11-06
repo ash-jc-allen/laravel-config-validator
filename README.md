@@ -16,6 +16,7 @@
 - [Installation](#installation)
     - [Requirements](#requirements)
     - [Install the Package](#install-the-package)
+    - [Publishing the Default Rulesets](#publishing-the-default-rulesets)
 - [Usage](#usage)
     - [Creating a Validation Ruleset](#creating-a-validation-ruleset)
         - [Using the Generator Command](#using-the-generator-command)
@@ -56,6 +57,19 @@ You can install the package via Composer:
 ```bash
 composer require ashallendesign/laravel-config-validator
 ```
+
+### Publishing the Default Rulesets
+
+To get you started with validating your apps config, Laravel Config Validator comes with some default rulesets. To start
+using these rulesets, you can publish them using the following command:
+
+```bash
+php artisan vendor:publish --tag=config-validator-defaults
+```
+
+The above command will copy the validation files and place in a ` config/validation ` folder in your project. These rules
+are just to get you started, so there are likely going to be rule in the files that don't apply to your app. So, once you've
+published them, feel free to delete them or edit them as much as you'd like.
 
 ## Usage
 
