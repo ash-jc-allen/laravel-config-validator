@@ -25,7 +25,7 @@ return [
 
     Rule::make('channels.slack')->rules(['array']),
     Rule::make('channels.slack.driver')->rules(['string']),
-    Rule::make('channels.slack.url')->rules(['string']),
+    Rule::make('channels.slack.url')->rules(['string', 'nullable']),
     Rule::make('channels.slack.username')->rules(['string']),
     Rule::make('channels.slack.emoji')->rules(['string']),
     Rule::make('channels.slack.level')->rules(['string']),

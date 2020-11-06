@@ -9,14 +9,14 @@ return [
 
     Rule::make('connections.sqlite')->rules(['array']),
     Rule::make('connections.sqlite.driver')->rules(['string']),
-    Rule::make('connections.sqlite.url')->rules(['string']),
+    Rule::make('connections.sqlite.url')->rules(['string', 'nullable']),
     Rule::make('connections.sqlite.database')->rules(['string']),
     Rule::make('connections.sqlite.prefix')->rules(['string']),
     Rule::make('connections.sqlite.foreign_key_constraints')->rules(['bool']),
 
     Rule::make('connections.mysql')->rules(['array']),
     Rule::make('connections.mysql.driver')->rules(['string']),
-    Rule::make('connections.mysql.url')->rules(['string']),
+    Rule::make('connections.mysql.url')->rules(['string', 'nullable']),
     Rule::make('connections.mysql.host')->rules(['string']),
     Rule::make('connections.mysql.port')->rules(['string']),
     Rule::make('connections.mysql.database')->rules(['string']),
@@ -33,7 +33,7 @@ return [
 
     Rule::make('connections.pgsql')->rules(['array']),
     Rule::make('connections.pgsql.driver')->rules(['string']),
-    Rule::make('connections.pgsql.url')->rules(['string']),
+    Rule::make('connections.pgsql.url')->rules(['string', 'nullable']),
     Rule::make('connections.pgsql.host')->rules(['string']),
     Rule::make('connections.pgsql.port')->rules(['string']),
     Rule::make('connections.pgsql.database')->rules(['string']),
@@ -47,7 +47,7 @@ return [
 
     Rule::make('connections.sqlsrv')->rules(['array']),
     Rule::make('connections.sqlsrv.driver')->rules(['string']),
-    Rule::make('connections.sqlsrv.url')->rules(['string']),
+    Rule::make('connections.sqlsrv.url')->rules(['string', 'nullable']),
     Rule::make('connections.sqlsrv.host')->rules(['string']),
     Rule::make('connections.sqlsrv.port')->rules(['string']),
     Rule::make('connections.sqlsrv.database')->rules(['string']),
@@ -68,16 +68,16 @@ return [
     Rule::make('redis.options.prefix')->rules(['string']),
 
     Rule::make('redis.default')->rules(['array']),
-    Rule::make('redis.default.url')->rules(['string']),
+    Rule::make('redis.default.url')->rules(['string', 'nullable']),
     Rule::make('redis.default.host')->rules(['string']),
     Rule::make('redis.default.password')->rules(['string', 'nullable']),
     Rule::make('redis.default.port')->rules(['string']),
-    Rule::make('redis.default.database')->rules(['string']),
+    Rule::make('redis.default.database')->rules(['alpha_dash']),
 
     Rule::make('redis.cache')->rules(['array']),
-    Rule::make('redis.cache.url')->rules(['string']),
+    Rule::make('redis.cache.url')->rules(['string', 'nullable']),
     Rule::make('redis.cache.host')->rules(['string']),
     Rule::make('redis.cache.password')->rules(['string', 'nullable']),
     Rule::make('redis.cache.port')->rules(['string']),
-    Rule::make('redis.cache.database')->rules(['string']),
+    Rule::make('redis.cache.database')->rules(['alpha_dash']),
 ];

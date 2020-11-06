@@ -6,7 +6,7 @@ return [
     Rule::make('driver')->rules(['string', 'in:bcrypt,argon,argon2id']),
 
     Rule::make('bcrypt')->rules(['array']),
-    Rule::make('bcrypt.rounds')->rules(['string']),
+    Rule::make('bcrypt.rounds')->rules(['integer']),
 
     Rule::make('argon')->rules(['array']),
     Rule::make('argon.memory')->rules(['integer']),
