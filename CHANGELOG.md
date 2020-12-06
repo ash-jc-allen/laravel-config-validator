@@ -1,5 +1,8 @@
 # Changelog
 
+**v1.3.0 (released 2020-12-06):**
+- Added support for PHP 8.
+
 **v1.2.0 (released 2020-11-06):**
 - Added default config rulesets that can be published. [#26](https://github.com/ash-jc-allen/laravel-config-validator/pull/26)
 
