@@ -28,7 +28,7 @@ class ConfigValidatorProvider extends ServiceProvider
     {
         // Publish the default config validation rules.
         $this->publishes([
-            __DIR__.'/../../config/validation' => config_path('validation'),
+            __DIR__.'/../../config-validation' => base_path('config-validation'),
         ], 'config-validator-defaults');
 
         if ($this->app->runningInConsole()) {
