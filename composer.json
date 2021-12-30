@@ -48,5 +48,8 @@
         "ConfigValidator": "AshAllenDesign\\ConfigValidator\\Facades\\ConfigValidator"
       }
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
   }
 }

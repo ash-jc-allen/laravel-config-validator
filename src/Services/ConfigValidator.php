@@ -77,6 +77,7 @@ class ConfigValidator
      * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
      * @return bool
+     *
      * @throws InvalidConfigValueException
      * @throws DirectoryNotFoundException
      * @throws NoValidationFilesFoundException
@@ -102,6 +103,7 @@ class ConfigValidator
      * exception.
      *
      * @return bool
+     *
      * @throws InvalidConfigValueException
      */
     private function runValidator(): bool
