@@ -16,6 +16,7 @@ trait LoadsConfigValidationFiles
      * @param  array  $configFiles
      * @param  string|null  $validationFolderPath
      * @return array
+     *
      * @throws DirectoryNotFoundException
      * @throws NoValidationFilesFoundException
      */
@@ -50,6 +51,7 @@ trait LoadsConfigValidationFiles
      *
      * @param  string|null  $validationFolderPath
      * @return string
+     *
      * @throws DirectoryNotFoundException
      */
     protected function determineFolderPath(string $validationFolderPath = null): string
