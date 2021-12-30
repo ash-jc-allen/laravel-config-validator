@@ -57,6 +57,7 @@ class ValidateConfigCommand extends Command
      * Execute the console command.
      *
      * @return int
+     *
      * @throws DirectoryNotFoundException
      * @throws InvalidConfigValueException
      * @throws NoValidationFilesFoundException
