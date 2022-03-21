@@ -20,6 +20,7 @@ class RunTest extends TestCase
         Config::set('mail.from.to', 'Ashley Allen');
         Config::set('mail.host', 'a random string');
         Config::set('mail.port', 1234);
+        Config::set('cache.prefix', 'foobar');
 
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
@@ -40,6 +41,7 @@ class RunTest extends TestCase
         Config::set('mail.from.to', 'Ashley Allen');
         Config::set('mail.host', 'a random string');
         Config::set('mail.port', 1234);
+        Config::set('cache.prefix', 'foobar');
 
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
@@ -62,6 +64,7 @@ class RunTest extends TestCase
         Config::set('mail.from.to', 'Ashley Allen');
         Config::set('mail.host', 'a random string');
         Config::set('mail.port', 1234);
+        Config::set('cache.prefix', 'foobar');
 
         // Set an invalid config that would purposely cause the validation to fail.
         // The validator will still pass though because we won't be validating
@@ -147,6 +150,7 @@ class RunTest extends TestCase
 
         // Set invalid config values that will have their error messages stored.
         Config::set('cache.default', null);
+        Config::set('cache.prefix', null);
         Config::set('mail.port', 'INVALID');
 
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
@@ -171,6 +175,9 @@ class RunTest extends TestCase
             'cache.default' => [
                 'The cache.default must be a string.',
                 'The cache.default field is required.',
+            ],
+            'cache.prefix' => [
+                'The cache.prefix must be equal to foobar.',
             ],
             'mail.port'     => [
                 'The mail.port must be an integer.',

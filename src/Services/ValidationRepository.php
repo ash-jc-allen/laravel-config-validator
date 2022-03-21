@@ -49,7 +49,7 @@ class ValidationRepository
             $configKey = $key.'.'.$rule->getFieldName();
 
             // Add the rules for the field to the repository.
-            $this->rules[$configKey] = implode('|', $rule->getRules());
+            $this->rules[$configKey] = $rule->getRules();
 
             // Add the current config values for the field to the repository.
             $this->fetchCurrentConfigValues($key, $rule);
