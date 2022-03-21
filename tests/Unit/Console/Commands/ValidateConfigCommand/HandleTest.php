@@ -14,6 +14,7 @@ class HandleTest extends TestCase
     public function command_can_be_run()
     {
         Config::set('cache.default', 'array');
+        Config::set('cache.prefix', 'foobar');
 
         $this->createMockValidationFile();
 
