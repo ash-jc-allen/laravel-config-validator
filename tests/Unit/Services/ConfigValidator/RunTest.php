@@ -24,9 +24,9 @@ class RunTest extends TestCase
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/mail.php'), file_get_contents($mailStubFilePath));
-        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/mail.php'), file_get_contents($mailStubFilePath));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($cacheStubFilePath));
 
         $configValidator = new ConfigValidator();
         $this->assertTrue($configValidator->run());
@@ -71,9 +71,9 @@ class RunTest extends TestCase
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/mail.php'), file_get_contents($mailStubFilePath));
-        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/mail.php'), file_get_contents($mailStubFilePath));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($cacheStubFilePath));
 
         $configValidator = new ConfigValidator();
         $this->assertTrue($configValidator->run(['mail']));
@@ -89,8 +89,8 @@ class RunTest extends TestCase
 
         $stubFilePath = __DIR__.'/../../Stubs/mail.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/mail.php'), file_get_contents($stubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/mail.php'), file_get_contents($stubFilePath));
 
         $configValidator = new ConfigValidator();
         $configValidator->throwExceptionOnFailure(true)->run();
@@ -106,8 +106,8 @@ class RunTest extends TestCase
 
         $stubFilePath = __DIR__.'/../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/cache.php'), file_get_contents($stubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($stubFilePath));
 
         $configValidator = new ConfigValidator();
         $configValidator->run();
@@ -130,8 +130,8 @@ class RunTest extends TestCase
         $this->expectExceptionMessage('No config validation files were found inside the directory.');
 
         // Create a file that isn't a PHP file.
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/cache.js'), 'https://ashallendesign.co.uk');
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/cache.js'), 'https://ashallendesign.co.uk');
 
         $configValidator = new ConfigValidator();
         $configValidator->run();
@@ -152,9 +152,9 @@ class RunTest extends TestCase
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/mail.php'), file_get_contents($mailStubFilePath));
-        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/mail.php'), file_get_contents($mailStubFilePath));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($cacheStubFilePath));
 
         $configValidator = new ConfigValidator();
 
@@ -186,8 +186,8 @@ class RunTest extends TestCase
 
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/cache.php'), file_get_contents($cacheStubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($cacheStubFilePath));
 
         $configValidator = new ConfigValidator();
         $this->assertFalse($configValidator->throwExceptionOnFailure(false)->run());
@@ -195,7 +195,7 @@ class RunTest extends TestCase
 
     protected function tearDown(): void
     {
-        File::deleteDirectory(config_path('validation'));
+        File::deleteDirectory(base_path('config-validation'));
 
         parent::tearDown();
     }

@@ -51,13 +51,13 @@ class HandleTest extends TestCase
     {
         $stubFilePath = __DIR__.'/../../../Stubs/cache.php';
 
-        File::makeDirectory(config_path('validation'));
-        File::put(config_path('validation/cache.php'), file_get_contents($stubFilePath));
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/cache.php'), file_get_contents($stubFilePath));
     }
 
     protected function tearDown(): void
     {
-        File::deleteDirectory(config_path('validation'));
+        File::deleteDirectory(base_path('config-validation'));
 
         parent::tearDown();
     }

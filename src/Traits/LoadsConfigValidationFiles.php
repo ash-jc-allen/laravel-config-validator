@@ -56,9 +56,7 @@ trait LoadsConfigValidationFiles
      */
     protected function determineFolderPath(string $validationFolderPath = null): string
     {
-        $path = $validationFolderPath
-            ? app()->basePath($validationFolderPath)
-            : app()->configPath('validation');
+        $path = base_path($validationFolderPath ?? 'config-validation');
 
         if ($folderPath = realpath($path)) {
             return $folderPath;

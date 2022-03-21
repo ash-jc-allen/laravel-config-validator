@@ -12,17 +12,17 @@ class ValidationMakeCommandTest extends TestCase
     {
         parent::setUp();
 
-        File::deleteDirectory(config_path('validation'));
+        File::deleteDirectory(base_path('config-validation'));
     }
 
     /** @test */
     public function validation_file_can_be_created()
     {
-        $validationFile = config_path('validation/app.php');
+        $validationFile = base_path('config-validation/app.php');
 
         // Delete the validation folder so that we can be
         // sure we have a new slate for testing.
-        File::deleteDirectory(config_path('validation'));
+        File::deleteDirectory(base_path('config-validation'));
 
         $this->assertFalse(File::exists($validationFile));
 
@@ -47,7 +47,7 @@ return [
 
     protected function tearDown(): void
     {
-        File::deleteDirectory(config_path('validation'));
+        File::deleteDirectory(base_path('config-validation'));
 
         parent::tearDown();
     }
