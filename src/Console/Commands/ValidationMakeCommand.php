@@ -58,8 +58,8 @@ class ValidationMakeCommand extends GeneratorCommand
      */
     protected function getPath($name): string
     {
-        return $this->laravel->configPath()
-               .'/validation/'
+        return $this->laravel->basePath()
+               .'/config-validation/'
                .str_replace('\\', '/', $this->argument('name')).'.php';
     }
 }
