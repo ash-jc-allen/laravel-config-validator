@@ -19,14 +19,14 @@ class ConfigValidator
      *
      * @var ValidationRepository
      */
-    private $validationRepository;
+    private ValidationRepository $validationRepository;
 
     /**
      * An array of the validation error messages.
      *
      * @var array
      */
-    private $errors = [];
+    private array $errors = [];
 
     /**
      * Specifies whether if an exception should be thrown
@@ -34,7 +34,7 @@ class ConfigValidator
      *
      * @var bool
      */
-    private $throwExceptionOnFailure = true;
+    private bool $throwExceptionOnFailure = true;
 
     /**
      * ConfigValidator constructor.

@@ -12,7 +12,7 @@ use Symfony\Component\Console\Helper\TableSeparator;
 
 class ValidateConfigCommand extends Command
 {
-    const ERROR_TABLE_HEADERS = [
+    private const ERROR_TABLE_HEADERS = [
         'Config Field',
         'Config Value',
         'Error',
@@ -39,7 +39,7 @@ class ValidateConfigCommand extends Command
      *
      * @var ConfigValidator
      */
-    private $configValidator;
+    private ConfigValidator $configValidator;
 
     /**
      * Create a new command instance.
@@ -73,12 +73,12 @@ class ValidateConfigCommand extends Command
         if (! empty($this->configValidator->errors())) {
             $this->buildErrorOutput();
 
-            return 1;
+            return self::FAILURE;
         }
 
         $this->info('Config validation passed!');
 
-        return 0;
+        return self::SUCCESS;
     }
 
     /**

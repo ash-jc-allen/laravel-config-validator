@@ -4,25 +4,25 @@ namespace AshAllenDesign\ConfigValidator\Services;
 
 class Rule
 {
-    const ENV_PRODUCTION = 'production';
+    public const ENV_PRODUCTION = 'production';
 
-    const ENV_LOCAL = 'local';
+    public const ENV_LOCAL = 'local';
 
-    const ENV_TESTING = 'testing';
+    public const ENV_TESTING = 'testing';
 
     /**
      * The config field name being validated.
      *
      * @var string
      */
-    private $fieldName;
+    private string $fieldName;
 
     /**
      * The validation used for validating the config field.
      *
      * @var array
      */
-    private $rules = [];
+    private array $rules = [];
 
     /**
      * The custom messages being used when validating the
@@ -30,12 +30,12 @@ class Rule
      *
      * @var array
      */
-    private $messages = [];
+    private array $messages = [];
 
     /**
      * @var array
      */
-    private $environments = [];
+    private array $environments = [];
 
     /**
      * Rule constructor.

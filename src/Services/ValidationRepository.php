@@ -10,7 +10,7 @@ class ValidationRepository
      *
      * @var array
      */
-    private $configValues = [];
+    private array $configValues = [];
 
     /**
      * An array of rules that are to be used for validating
@@ -18,7 +18,7 @@ class ValidationRepository
      *
      * @var array
      */
-    private $rules = [];
+    private array $rules = [];
 
     /**
      * An array of custom messages that are to be used when
@@ -26,7 +26,7 @@ class ValidationRepository
      *
      * @var array
      */
-    private $messages = [];
+    private array $messages = [];
 
     /**
      * Add the new Rules' data to the repository so that we
@@ -95,7 +95,7 @@ class ValidationRepository
             return true;
         }
 
-        return in_array(app()->environment(), $environments);
+        return in_array(app()->environment(), $environments, true);
     }
 
     /**
