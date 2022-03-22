@@ -18,8 +18,6 @@
   ],
   "require": {
     "php": "^8.0",
-    "nesbot/carbon": "~2.0",
-    "guzzlehttp/guzzle": "^7.0",
     "illuminate/container": "^8.0|^9.0",
     "illuminate/cache": "^8.0|^9.0",
     "ext-json": "*"

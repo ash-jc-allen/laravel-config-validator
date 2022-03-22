@@ -99,7 +99,7 @@ trait LoadsConfigValidationFiles
             return ['*.php'];
         }
 
-        return array_map(function ($configValue) {
+        return array_map(static function (string $configValue): string {
             return $configValue.'.php';
         }, $configFiles);
     }
