@@ -51,11 +51,11 @@ class Rule
      * A helper method used for creating a new rule.
      *
      * @param  string  $fieldName
-     * @return static
+     * @return Rule
      */
     public static function make(string $fieldName): Rule
     {
-        return new static($fieldName);
+        return new self($fieldName);
     }
 
     /**
