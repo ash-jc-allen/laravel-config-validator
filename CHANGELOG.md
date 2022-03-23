@@ -1,5 +1,16 @@
 # Changelog
 
+**v2.0.0 (released 2022-03-22):**
+- Added support for Laravel 9 and PHP 8.1. [#32](https://github.com/ash-jc-allen/laravel-config-validator/pull/32)
+- Dropped support for Laravel 6 and 7. [#32](https://github.com/ash-jc-allen/laravel-config-validator/pull/32)
+- Dropped support for PHP 7.3 and  7.4. [#32](https://github.com/ash-jc-allen/laravel-config-validator/pull/32)
+- Migrated from TravisCI to GitHub Actions for running tests. [#35](https://github.com/ash-jc-allen/laravel-config-validator/pull/35)
+- Added Larastan workflow to run on GitHub Actions. [#34](https://github.com/ash-jc-allen/laravel-config-validator/pull/34)
+- Added type hints and fields types. [#35](https://github.com/ash-jc-allen/laravel-config-validator/pull/35)
+- Changed default directory from `config/validation` to `config-validation`. [#31](https://github.com/ash-jc-allen/laravel-config-validator/pull/31)
+- Moved default config rulesets to `stubs/config-validation`. [#36](https://github.com/ash-jc-allen/laravel-config-validator/pull/36)
+- Fixed bug that prevented Rule objects from being used. [#33](https://github.com/ash-jc-allen/laravel-config-validator/pull/33)
+
 **v1.3.0 (released 2020-12-06):**
 - Added support for PHP 8.
 
