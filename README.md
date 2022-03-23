@@ -37,6 +37,7 @@
 - [Security](#security)
 - [Contribution](#contribution)
 - [Changelog](#changelog)
+- [Upgrading](#upgrading)
 - [License](#license)
 
 ## Overview
@@ -338,6 +339,10 @@ Note: A contribution guide will be added soon.
 ## Changelog
 
 Check the [CHANGELOG](CHANGELOG.md) to get more information about the latest changes.
+
+## Upgrading
+
+Check the [UPGRADE](UPGRADE.md) guide to get more information on how to update this library to newer versions.
 
 ## License
 
