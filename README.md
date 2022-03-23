@@ -49,8 +49,8 @@ A Laravel package that allows you to validate your config values and environment
 ### Requirements
 The package has been developed and tested to work with the following minimum requirements:
 
-- PHP 7.3
-- Laravel 6
+- PHP 8.0
+- Laravel 8
 
 ### Install the Package
 You can install the package via Composer:
@@ -61,14 +61,14 @@ composer require ashallendesign/laravel-config-validator
 
 ### Publishing the Default Rulesets
 
-To get you started with validating your apps config, Laravel Config Validator comes with some default rulesets. To start
+To get you started with validating your app's config, Laravel Config Validator comes with some default rulesets. To start
 using these rulesets, you can publish them using the following command:
 
 ```bash
 php artisan vendor:publish --tag=config-validator-defaults
 ```
 
-The above command will copy the validation files and place in a ` config/validation ` folder in your project. These rules
+The above command will copy the validation files and place in a ` config-validation ` folder in your project's root. These rules
 are just to get you started, so there are likely going to be rule in the files that don't apply to your app. So, once you've
 published them, feel free to delete them or edit them as much as you'd like.
 
@@ -86,26 +86,26 @@ this, you could use the following command:
 php artisan make:config-validation app
 ```
 
-Running the above command would create a file in ``` config/validation/app.php ``` ready for you to start adding your config
+Running the above command would create a file in ``` config-validation/app.php ``` ready for you to start adding your config
 validation.
 
 #### Ruleset Location
 
 To validate your application's config, you need to define the validation rules first. You can do this by placing them inside
-files in a ``` config/validation ``` folder with names that match the config file you're validating. As an example, to
-validate the ``` config/app.php ``` config file, you would create a new file at ``` config/validation/app.php ``` that
+files in a ``` config-validation ``` folder with names that match the config file you're validating. As an example, to
+validate the ``` config/app.php ``` config file, you would create a new file at ``` config-validation/app.php ``` that
 would hold the rules.
 
 #### Adding Rules to a Ruleset
 
-Once you have your ruleset file created in the ``` config/validation ``` folder, you can start adding your validation
+Once you have your ruleset file created in the ``` config-validation ``` folder, you can start adding your validation
 rules.
 
 Under the hood, Laravel Config Validator uses the built-in ``` Validator ``` class, so it should seem pretty familiar
 to work with. To check out the available Laravel validation rules that can be used, [click here](https://laravel.com/docs/8.x/validation#available-validation-rules).
 
 As an example, we might want to add a config validation rule to ensure that the ``` driver ``` field in the ``` app/mail.php ```
-file is a supported field. To do this, we could create a file at ``` config/validation/mail.php ``` with the following:
+file is a supported field. To do this, we could create a file at ``` config-validation/mail.php ``` with the following:
 
 ```php
 <?php
