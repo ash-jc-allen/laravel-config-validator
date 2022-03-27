@@ -9,7 +9,8 @@ use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use function Termwind\{render, renderUsing};
+use function Termwind\render;
+use function Termwind\renderUsing;
 
 class ValidateConfigCommand extends Command
 {
@@ -65,7 +66,7 @@ class ValidateConfigCommand extends Command
             renderUsing($output);
         }
 
-        render(<<<HTML
+        render(<<<'HTML'
             <div class="my-1 mx-2">
                 Validating config...
             </div>
@@ -85,7 +86,7 @@ class ValidateConfigCommand extends Command
             return self::FAILURE;
         }
 
-        render(<<<HTML
+        render(<<<'HTML'
             <div class="my-1 mx-2 bg-green text-black px-1 font-bold">
                 Config validation passed!
             </div>
