@@ -32,6 +32,8 @@ class ConfigValidatorProvider extends ServiceProvider
         ], 'config-validator-defaults');
 
         if ($this->app->runningInConsole()) {
+            $this->loadViewsFrom(__DIR__.'/../../resources/views', 'config-validator');
+
             $this->commands([
                 ValidateConfigCommand::class,
                 ValidationMakeCommand::class,

@@ -7,9 +7,18 @@ use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Output\BufferedOutput;
+use function Termwind\renderUsing;
 
 class HandleTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        renderUsing(new BufferedOutput());
+    }
+
     /** @test */
     public function command_can_be_run()
     {
@@ -19,7 +28,7 @@ class HandleTest extends TestCase
         $this->createMockValidationFile();
 
         Artisan::call('config:validate');
-        $this->assertEquals("Validating config...\nConfig validation passed!\n", Artisan::output());
+        $this->assertStringContainsString(Artisan::output(), 'Config validation passed!');
     }
 
     /** @test */
@@ -32,7 +41,7 @@ class HandleTest extends TestCase
         });
 
         Artisan::call('config:validate --path=hello');
-        $this->assertEquals("Validating config...\nConfig validation passed!\n", Artisan::output());
+        $this->assertStringContainsString(Artisan::output(), 'Config validation passed!');
     }
 
     /** @test */
@@ -45,7 +54,7 @@ class HandleTest extends TestCase
         });
 
         Artisan::call('config:validate --files=auth,mail,telescope');
-        $this->assertEquals("Validating config...\nConfig validation passed!\n", Artisan::output());
+        $this->assertStringContainsString(Artisan::output(), 'Config validation passed!');
     }
 
     private function createMockValidationFile()
