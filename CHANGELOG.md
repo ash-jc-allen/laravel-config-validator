@@ -1,7 +1,7 @@
 # Changelog
 
 **v2.1.0 (released 2022-04-02):**
-- Improved command output using Termwind. Huge thanks to @xiCO2k for this! [#38](https://github.com/ash-jc-allen/laravel-config-validator/pull/38)
+- Improved command output using Termwind. Huge thanks to [Francisco Madeira](https://github.com/xiCO2k) for this! [#38](https://github.com/ash-jc-allen/laravel-config-validator/pull/38)
 - Removed unneeded `illuminate/cache` dependency requirement. Added dependency requirement for `illuminate/command`. [#40](https://github.com/ash-jc-allen/laravel-config-validator/pull/40)
 - Removed old and unneeded exceptions. [#39](https://github.com/ash-jc-allen/laravel-config-validator/pull/39)
 - Fixed bug that was removing underscores from validation error messages. [#43](https://github.com/ash-jc-allen/laravel-config-validator/pull/43)
