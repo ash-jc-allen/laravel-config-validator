@@ -8,9 +8,7 @@ use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use function Termwind\render;
-use function Termwind\renderUsing;
 
 class ValidateConfigCommand extends Command
 {

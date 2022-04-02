@@ -138,7 +138,7 @@ class HandleTest extends TestCase
 
     private function createMockValidationFile(): void
     {
-        $stubFilePath = __DIR__ . '/../../../Stubs/cache.php';
+        $stubFilePath = __DIR__.'/../../../Stubs/cache.php';
 
         File::makeDirectory(base_path('config-validation'));
         File::put(base_path('config-validation/cache.php'), file_get_contents($stubFilePath));
