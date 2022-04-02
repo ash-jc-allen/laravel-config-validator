@@ -107,7 +107,7 @@ class RunTest extends TestCase
         $this->expectException(InvalidConfigValueException::class);
         $this->expectExceptionMessage('The cache.default must be a string.');
 
-        $stubFilePath = __DIR__ . '/../../Stubs/cache.php';
+        $stubFilePath = __DIR__.'/../../Stubs/cache.php';
 
         File::makeDirectory(base_path('config-validation'));
         File::put(base_path('config-validation/cache.php'), file_get_contents($stubFilePath));
@@ -188,7 +188,7 @@ class RunTest extends TestCase
             ],
             'mail.field_with_underscores' => [
                 'The mail.field_with_underscores must be an integer.',
-            ]
+            ],
         ], $configValidator->errors());
     }
 
