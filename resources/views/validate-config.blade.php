@@ -1,7 +1,7 @@
 <div class="my-1 mx-2">
     <div class="bg-red-700 text-white font-bold px-1 mb-1">Config validation failed!</div>
 
-    <div class="mb-1"><b>{{ count($allErrors) }} errors</b> found on your application:</div>
+    <div class="mb-1"><b>{{ count($allErrors) }} errors</b> found in your application:</div>
     <div class="space-y-1">
         @foreach ($allErrors as $configField => $errors)
             <div>
@@ -17,7 +17,7 @@
                     </span>
                 </div>
                 @foreach ($errors as $error)
-                    <div class="ml-2 text-gray-500">⇁ {{ $error }}</div>
+                    <div class="ml-2 text-gray-500">- {{ $error }}</div>
                 @endforeach
             </div>
         @endforeach

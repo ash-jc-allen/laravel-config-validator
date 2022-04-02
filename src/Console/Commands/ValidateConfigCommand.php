@@ -8,9 +8,7 @@ use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use function Termwind\render;
-use function Termwind\renderUsing;
 
 class ValidateConfigCommand extends Command
 {
@@ -60,23 +58,15 @@ class ValidateConfigCommand extends Command
      */
     public function handle(): int
     {
-        $output = (new ConsoleOutput)->section();
+        try {
+            $this->configValidator
+                ->throwExceptionOnFailure(false)
+                ->run($this->determineFilesToValidate(), $this->option('path'));
+        } catch (DirectoryNotFoundException|NoValidationFilesFoundException $exception) {
+            $this->displayErrorMessage($exception->getMessage());
 
-        if ($this->laravel->environment() !== 'testing') {
-            renderUsing($output);
+            return self::FAILURE;
         }
-
-        render(<<<'HTML'
-            <div class="my-1 mx-2">
-                Validating config...
-            </div>
-        HTML);
-
-        $this->configValidator
-            ->throwExceptionOnFailure(false)
-            ->run($this->determineFilesToValidate(), $this->option('path'));
-
-        $output->clear();
 
         if (! empty($this->configValidator->errors())) {
             render(view('config-validator::validate-config', [
@@ -86,11 +76,7 @@ class ValidateConfigCommand extends Command
             return self::FAILURE;
         }
 
-        render(<<<'HTML'
-            <div class="my-1 mx-2 bg-green text-black px-1 font-bold">
-                Config validation passed!
-            </div>
-        HTML);
+        $this->displaySuccessfulValidationMessage();
 
         return self::SUCCESS;
     }
@@ -120,5 +106,21 @@ class ValidateConfigCommand extends Command
         }
 
         return $filesToValidate;
+    }
+
+    private function displaySuccessfulValidationMessage(): void
+    {
+        render(<<<'HTML'
+            <div class="my-1 mx-2 bg-green text-black px-1 font-bold">
+                Config validation passed!
+            </div>
+        HTML);
+    }
+
+    private function displayErrorMessage(string $message): void
+    {
+        render(<<<HTML
+                <div class="my-1 mx-2 bg-red-700 text-white font-bold px-1 mb-1">$message</div>
+            HTML);
     }
 }
