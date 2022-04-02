@@ -107,7 +107,7 @@ class RunTest extends TestCase
         $this->expectException(InvalidConfigValueException::class);
         $this->expectExceptionMessage('The cache.default must be a string.');
 
-        $stubFilePath = __DIR__.'/../../Stubs/cache.php';
+        $stubFilePath = __DIR__ . '/../../Stubs/cache.php';
 
         File::makeDirectory(base_path('config-validation'));
         File::put(base_path('config-validation/cache.php'), file_get_contents($stubFilePath));
@@ -144,14 +144,15 @@ class RunTest extends TestCase
     public function validation_error_messages_can_be_returned()
     {
         // Set valid config values that will pass all of the validation rules.
-        Config::set('mail.from.address', 'mail@ashallendesign.co.uk');
         Config::set('mail.from.to', 'Ashley Allen');
         Config::set('mail.host', 'a random string');
 
         // Set invalid config values that will have their error messages stored.
+        Config::set('mail.from.address', 'INVALID');
         Config::set('cache.default', null);
         Config::set('cache.prefix', null);
         Config::set('mail.port', 'INVALID');
+        Config::set('mail.field_with_underscores', 'INVALID');
 
         $mailStubFilePath = __DIR__.'/../../Stubs/mail.php';
         $cacheStubFilePath = __DIR__.'/../../Stubs/cache.php';
@@ -179,9 +180,15 @@ class RunTest extends TestCase
             'cache.prefix' => [
                 'The cache.prefix must be equal to foobar.',
             ],
-            'mail.port'     => [
+            'mail.from.address' => [
+                'The mail.from.address must be a valid email address.',
+            ],
+            'mail.port' => [
                 'The mail.port must be an integer.',
             ],
+            'mail.field_with_underscores' => [
+                'The mail.field_with_underscores must be an integer.',
+            ]
         ], $configValidator->errors());
     }
 

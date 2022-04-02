@@ -110,7 +110,20 @@ class ConfigValidator
     {
         $ruleSet = $this->validationRepository->asArray();
 
-        $validator = Validator::make($ruleSet['config_values'], $ruleSet['rules'], $ruleSet['messages']);
+        // Build an associative array of the keys that we are validating. We
+        // can pass this to the validator so that the config key names
+        // are preserved in the error messages and not changed.
+        $attributes = array_combine(
+            array_keys($ruleSet['rules']),
+            array_keys($ruleSet['rules']),
+        );
+
+        $validator = Validator::make(
+            $ruleSet['config_values'],
+            $ruleSet['rules'],
+            $ruleSet['messages'],
+            $attributes,
+        );
 
         if ($validator->fails()) {
             $this->errors = $validator->errors()->messages();

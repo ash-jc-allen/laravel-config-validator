@@ -15,4 +15,7 @@ return [
 
     Rule::make('from.to')
         ->rules(['string', 'required']),
+
+    Rule::make('field_with_underscores')
+        ->rules(['integer', 'nullable']),
 ];
