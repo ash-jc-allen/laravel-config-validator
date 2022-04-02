@@ -1,5 +1,12 @@
 # Changelog
 
+**v2.1.0 (released 2022-04-02):**
+- Improved command output using Termwind. Huge thanks to [Francisco Madeira](https://github.com/xiCO2k) for this! [#38](https://github.com/ash-jc-allen/laravel-config-validator/pull/38)
+- Removed unneeded `illuminate/cache` dependency requirement. Added dependency requirement for `illuminate/command`. [#40](https://github.com/ash-jc-allen/laravel-config-validator/pull/40)
+- Removed old and unneeded exceptions. [#39](https://github.com/ash-jc-allen/laravel-config-validator/pull/39)
+- Fixed bug that was removing underscores from validation error messages. [#43](https://github.com/ash-jc-allen/laravel-config-validator/pull/43)
+- Updated the PHPUnit config file to the newest format. [#45](https://github.com/ash-jc-allen/laravel-config-validator/pull/45)
+
 **v2.0.0 (released 2022-03-22):**
 - Added support for Laravel 9 and PHP 8.1. [#32](https://github.com/ash-jc-allen/laravel-config-validator/pull/32)
 - Dropped support for Laravel 6 and 7. [#32](https://github.com/ash-jc-allen/laravel-config-validator/pull/32)
