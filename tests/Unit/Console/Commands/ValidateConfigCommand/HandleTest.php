@@ -67,13 +67,20 @@ class HandleTest extends TestCase
     /** @test */
     public function error_is_displayed_if_a_config_validation_fails(): void
     {
+        Config::set('cache.field', ['invalid', 'items', 'in', 'an', 'array']);
+
+        Config::set('mail.port', [
+            'assoc' => 'array',
+            'invalid' => 'item',
+        ]);
+
         $this->mock(ConfigValidator::class, function ($mock) {
             $mock->shouldReceive('throwExceptionOnFailure')->withArgs([false])->andReturn($mock);
             $mock->shouldReceive('run')->withArgs([['auth', 'mail', 'telescope'], null]);
             $mock->shouldReceive('errors')->withNoArgs()->andReturn([
-                'cache.default' => [
-                    'The cache.default must be a string.',
-                    'The cache.default field is required.',
+                'cache.field' => [
+                    'The cache.field must be a string.',
+                    'The cache.field field is required.',
                 ],
                 'cache.prefix' => [
                     'The cache.prefix must be equal to foobar.',
@@ -81,23 +88,31 @@ class HandleTest extends TestCase
                 'mail.port' => [
                     'The mail.port must be an integer.',
                 ],
+                'mail.empty' => [
+                    'The mail.empty must be a string.',
+                ],
             ]);
         });
 
         $output = $this->runCommand('config:validate --files=auth,mail,telescope');
 
         $this->assertStringContainsString('Config validation failed!', $output);
-        $this->assertStringContainsString('3 errors found in your application:', $output);
+        $this->assertStringContainsString('4 errors found in your application:', $output);
 
-        $this->assertStringContainsString('cache.default', $output);
-        $this->assertStringContainsString('The cache.default must be a string.', $output);
-        $this->assertStringContainsString('The cache.default field is required.', $output);
+        $this->assertStringContainsString('cache.field', $output);
+        $this->assertStringContainsString('["invalid","items","in","an","array"]', $output);
+        $this->assertStringContainsString('The cache.field must be a string.', $output);
+        $this->assertStringContainsString('The cache.field field is required.', $output);
 
-        $this->assertStringContainsString('cache.prefix', $output);
+        $this->assertStringContainsString('cache.prefix  Value: laravel_cache', $output);
         $this->assertStringContainsString('The cache.prefix must be equal to foobar.', $output);
 
         $this->assertStringContainsString('mail.port', $output);
+        $this->assertStringContainsString('{"assoc":"array","invalid":"item"}', $output);
         $this->assertStringContainsString('The mail.port must be an integer.', $output);
+
+        $this->assertStringContainsString('mail.empty', $output);
+        $this->assertStringContainsString('The mail.empty must be a string.', $output);
     }
 
     /** @test */

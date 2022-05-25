@@ -10,7 +10,11 @@
                     <span class="ml-2">
                         Value:
                         @if (config($configField))
-                            <b>{{ config($configField) }}</b>
+                            @if(is_array(config($configField)))
+                                <b>{{ json_encode(config($configField, JSON_PRETTY_PRINT)) }}</b>
+                            @else
+                                <b>{{ config($configField) }}</b>
+                            @endif
                         @else
                             <i class="text-gray-400">[empty field]</i>
                         @endif
