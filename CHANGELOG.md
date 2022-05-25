@@ -1,5 +1,9 @@
 # Changelog
 
+**v2.2.0 (released 2022-05-25):**
+- Fixed a bug that broke the command's failure output if a config value was an array. [#48](https://github.com/ash-jc-allen/laravel-config-validator/pull/48)
+- Added `illuminate/validation` and `illuminate/view` as Composer dependencies. [#49](https://github.com/ash-jc-allen/laravel-config-validator/pull/49)
+
 **v2.1.0 (released 2022-04-02):**
 - Improved command output using Termwind. Huge thanks to [Francisco Madeira](https://github.com/xiCO2k) for this! [#38](https://github.com/ash-jc-allen/laravel-config-validator/pull/38)
 - Removed unneeded `illuminate/cache` dependency requirement. Added dependency requirement for `illuminate/command`. [#40](https://github.com/ash-jc-allen/laravel-config-validator/pull/40)
