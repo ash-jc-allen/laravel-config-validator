@@ -104,7 +104,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('The cache.field must be a string.', $output);
         $this->assertStringContainsString('The cache.field field is required.', $output);
 
-        $this->assertStringContainsString('cache.prefix  Value: laravel_cache_', $output);
+        $this->assertStringContainsString('cache.prefix  Value: laravel_cache', $output);
         $this->assertStringContainsString('The cache.prefix must be equal to foobar.', $output);
 
         $this->assertStringContainsString('mail.port', $output);
