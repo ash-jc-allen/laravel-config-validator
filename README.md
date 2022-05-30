@@ -296,9 +296,10 @@ The example belows shows how you could prevent any exceptions from being thrown 
 ```php
 $configValidator = new ConfigValidator();
 
-$errors = $configValidator->throwExceptionOnFailure(false)
-                ->run()
-                ->errors();
+$configValidator->throwExceptionOnFailure(false)
+                ->run();
+
+$errors = $configValidator->errors();
 ```
 
 ### Facade
