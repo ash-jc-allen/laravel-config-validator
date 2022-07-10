@@ -19,6 +19,21 @@
                             <i class="text-gray-400">[empty field]</i>
                         @endif
                     </span>
+
+                </div>
+                @foreach ($errors as $error)
+                    <div class="ml-2 text-gray-500">- {{ $error }}</div>
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+
+    <div class="mb-1"><b>{{ count($allMissing) }} Missing </b> found in your application:</div>
+    <div class="space-y-1">
+        @foreach ($allMissing as $configField => $errors)
+            <div>
+                <div>
+                    <span class="text-yellow font-bold">{{ $configField }}</span>
                 </div>
                 @foreach ($errors as $error)
                     <div class="ml-2 text-gray-500">- {{ $error }}</div>

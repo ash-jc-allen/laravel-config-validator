@@ -20,7 +20,7 @@ trait LoadsConfigValidationFiles
      * @throws DirectoryNotFoundException
      * @throws NoValidationFilesFoundException
      */
-    private function getValidationFiles(array $configFiles = [], string $validationFolderPath = null): array
+    protected function getValidationFiles(array $configFiles = [], string $validationFolderPath = null): array
     {
         $files = [];
 

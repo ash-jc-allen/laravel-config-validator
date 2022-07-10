@@ -6,6 +6,7 @@ use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
+use AshAllenDesign\ConfigValidator\Services\LocalConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use function Termwind\render;
@@ -19,7 +20,8 @@ class ValidateConfigCommand extends Command
      */
     protected $signature = 'config:validate
                             {--files=* : The config files that should be validated.}
-                            {--path= : The path of the folder where the validation files are location.}';
+                            {--path= : The path of the folder where the validation files are location.}
+                            {--skip-missing : Skip configs that are not validated.}';
 
     /**
      * The console command description.
@@ -36,15 +38,23 @@ class ValidateConfigCommand extends Command
     private ConfigValidator $configValidator;
 
     /**
+     * The object that is used for validating the local config.
+     *
+     * @var LocalConfigValidator
+     */
+    private LocalConfigValidator $configLocalValidator;
+
+    /**
      * Create a new command instance.
      *
      * @param  ConfigValidator  $configValidator
      */
-    public function __construct(ConfigValidator $configValidator)
+    public function __construct(ConfigValidator $configValidator, LocalConfigValidator $configLocalValidator)
     {
         parent::__construct();
 
         $this->configValidator = $configValidator;
+        $this->configLocalValidator = $configLocalValidator;
     }
 
     /**
@@ -58,6 +68,11 @@ class ValidateConfigCommand extends Command
      */
     public function handle(): int
     {
+        if (!$this->option('skip-missing')) {
+            $this->configLocalValidator->run();
+        }
+
+
         try {
             $this->configValidator
                 ->throwExceptionOnFailure(false)
@@ -68,9 +83,10 @@ class ValidateConfigCommand extends Command
             return self::FAILURE;
         }
 
-        if (! empty($this->configValidator->errors())) {
+        if (! empty($this->configValidator->errors()) || $this->configLocalValidator->errors()) {
             render(view('config-validator::validate-config', [
                 'allErrors' => $this->configValidator->errors(),
+                'allMissing' => $this->configLocalValidator->errors(),
             ]));
 
             return self::FAILURE;

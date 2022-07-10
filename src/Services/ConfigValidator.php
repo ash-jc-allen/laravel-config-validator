@@ -5,29 +5,10 @@ namespace AshAllenDesign\ConfigValidator\Services;
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
-use AshAllenDesign\ConfigValidator\Traits\LoadsConfigValidationFiles;
 use Illuminate\Support\Facades\Validator;
 
-class ConfigValidator
+class ConfigValidator extends BaseValidator
 {
-    use LoadsConfigValidationFiles;
-
-    /**
-     * The repository that holds the config values being
-     * validated, along with the rules and messages
-     * used for running the validation.
-     *
-     * @var ValidationRepository
-     */
-    private ValidationRepository $validationRepository;
-
-    /**
-     * An array of the validation error messages.
-     *
-     * @var array
-     */
-    private array $errors = [];
-
     /**
      * Specifies whether if an exception should be thrown
      * if the config validation fails.
@@ -35,26 +16,6 @@ class ConfigValidator
      * @var bool
      */
     private bool $throwExceptionOnFailure = true;
-
-    /**
-     * ConfigValidator constructor.
-     *
-     * @param  ValidationRepository|null  $validationRepository
-     */
-    public function __construct(ValidationRepository $validationRepository = null)
-    {
-        $this->validationRepository = $validationRepository ?? new ValidationRepository();
-    }
-
-    /**
-     * Return the validation error messages.
-     *
-     * @return array
-     */
-    public function errors(): array
-    {
-        return $this->errors;
-    }
 
     /**
      * Determine whether an exception should be thrown if
