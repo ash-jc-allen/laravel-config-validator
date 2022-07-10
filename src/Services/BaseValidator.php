@@ -34,7 +34,7 @@ abstract class BaseValidator
         $this->validationRepository = $validationRepository ?? new ValidationRepository();
     }
 
-    public abstract function run(array $configFiles = [], string $validationFolderPath = null): bool;
+    abstract public function run(array $configFiles = [], string $validationFolderPath = null): bool;
 
     /**
      * Return the validation error messages.

@@ -68,10 +68,9 @@ class ValidateConfigCommand extends Command
      */
     public function handle(): int
     {
-        if (!$this->option('skip-missing')) {
+        if (! $this->option('skip-missing')) {
             $this->configLocalValidator->run();
         }
-
 
         try {
             $this->configValidator

@@ -19,7 +19,7 @@ class LocalConfigValidator extends BaseValidator
             $this->errors[$value][] = 'No validation rule specified';
         }
 
-        if (!empty($this->errors)) {
+        if (! empty($this->errors)) {
             return false;
         }
 
