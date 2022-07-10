@@ -27,7 +27,7 @@ abstract class BaseValidator
     /**
      * ConfigValidator constructor.
      *
-     * @param ValidationRepository|null $validationRepository
+     * @param  ValidationRepository|null  $validationRepository
      */
     public function __construct(ValidationRepository $validationRepository = null)
     {

@@ -19,7 +19,7 @@ class LocalConfigValidator extends BaseValidator
             $this->errors[$value][] = 'No validation rule specified';
         }
 
-        if (!empty($this->errors)) {
+        if (! empty($this->errors)) {
             return false;
         }
 
@@ -68,7 +68,7 @@ class LocalConfigValidator extends BaseValidator
 
             // restore the array element
             array_pop($explodedKey);
-            if (0 === (int)$lastElementInKey) {
+            if (0 === (int) $lastElementInKey) {
                 $processedKeys[] = implode('.', $explodedKey);      // adds: config.value
             }
         }
