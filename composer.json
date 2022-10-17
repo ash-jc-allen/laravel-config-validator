@@ -54,5 +54,7 @@
   "scripts": {
     "test": "vendor/bin/phpunit",
     "larastan": "vendor/bin/phpstan analyse"
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
