@@ -1,5 +1,8 @@
 # Changelog
 
+**v2.3.0 (released 2022-10-17):**
+- Added support for PHP 8.2. [#58](https://github.com/ash-jc-allen/laravel-config-validator/pull/58)
+
 **v2.2.0 (released 2022-05-25):**
 - Fixed a bug that broke the command's failure output if a config value was an array. [#48](https://github.com/ash-jc-allen/laravel-config-validator/pull/48)
 - Added `illuminate/validation` and `illuminate/view` as Composer dependencies. [#49](https://github.com/ash-jc-allen/laravel-config-validator/pull/49)
