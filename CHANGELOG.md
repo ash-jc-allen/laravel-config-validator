@@ -1,5 +1,8 @@
 # Changelog
 
+**v2.4.0 (released 2023-01-12):**
+- Added support for Laravel 10. [#59](https://github.com/ash-jc-allen/laravel-config-validator/pull/59)
+
 **v2.3.0 (released 2022-10-17):**
 - Added support for PHP 8.2. [#58](https://github.com/ash-jc-allen/laravel-config-validator/pull/58)
 
