@@ -8,6 +8,7 @@ use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+
 use function Termwind\render;
 
 class ValidateConfigCommand extends Command
