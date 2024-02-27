@@ -70,8 +70,8 @@ class ValidationRepository
     public function asArray(): array
     {
         return [
-            'rules'         => $this->rules,
-            'messages'      => $this->messages,
+            'rules' => $this->rules,
+            'messages' => $this->messages,
             'config_values' => $this->configValues,
         ];
     }
