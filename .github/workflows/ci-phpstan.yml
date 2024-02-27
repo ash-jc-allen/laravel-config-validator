@@ -6,11 +6,12 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
         php: [8.0, 8.1, 8.2]
-        laravel: [8.*, 9.*, 10.*]
+        laravel: ['8.*', '9.*', '10.*', '11.*']
         include:
           - laravel: 10.*
             testbench: 8.*
@@ -18,10 +19,16 @@ jobs:
             testbench: 7.*
           - laravel: 8.*
             testbench: 6.*
+          - laravel: 11.*
+            testbench: 9.*
         exclude:
           - laravel: 10.*
             php: 8.0
           - laravel: 10.*
+            php: 8.1
+          - laravel: 11.*
+            php: 8.0
+          - laravel: 11.*
             php: 8.1
 
     name: PHP${{ matrix.php }} - Laravel ${{ matrix.laravel }}
@@ -43,9 +50,11 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --prefer-dist --no-interaction --no-suggest
+
       - name: Run Larastan
         run: vendor/bin/phpstan analyse
