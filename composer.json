@@ -1,60 +1,60 @@
 {
-  "name": "ashallendesign/laravel-config-validator",
-  "description": "A package for validating your Laravel app's config.",
-  "type": "library",
-  "homepage": "https://github.com/ash-jc-allen/laravel-config-validator",
-  "keywords": [
-    "ashallendesign",
-    "config",
-    "validation",
-    "laravel"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Ash Allen",
-      "email": "mail@ashallendesign.co.uk"
-    }
-  ],
-  "require": {
-    "php": "^8.0",
-    "illuminate/console": "^8.0|^9.0|^10.0",
-    "illuminate/container": "^8.0|^9.0|^10.0",
-    "illuminate/validation": "^8.0|^9.0|^10.0",
-    "illuminate/view": "^8.0|^9.0|^10.0",
-    "nunomaduro/termwind": "^1.6",
-    "ext-json": "*"
-  },
-  "require-dev": {
-    "mockery/mockery": "^1.0",
-    "nunomaduro/larastan": "^1.0.0||^2.0.0",
-    "orchestra/testbench": "^6.0|^7.0|^8.0",
-    "phpunit/phpunit": "^9.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "AshAllenDesign\\ConfigValidator\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "AshAllenDesign\\ConfigValidator\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "AshAllenDesign\\ConfigValidator\\Providers\\ConfigValidatorProvider"
-      ],
-      "aliases": {
-        "ConfigValidator": "AshAllenDesign\\ConfigValidator\\Facades\\ConfigValidator"
-      }
-    }
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit",
-    "larastan": "vendor/bin/phpstan analyse"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "ashallendesign/laravel-config-validator",
+    "description": "A package for validating your Laravel app's config.",
+    "type": "library",
+    "homepage": "https://github.com/ash-jc-allen/laravel-config-validator",
+    "keywords": [
+        "ashallendesign",
+        "config",
+        "validation",
+        "laravel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ash Allen",
+            "email": "mail@ashallendesign.co.uk"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/console": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/container": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/validation": "^8.0|^9.0|^10.0|^11.0",
+        "illuminate/view": "^8.0|^9.0|^10.0|^11.0",
+        "nunomaduro/termwind": "^1.6|^2.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "nunomaduro/larastan": "^1.0.0||^2.0.0",
+        "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0",
+        "phpunit/phpunit": "^9.0|^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AshAllenDesign\\ConfigValidator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AshAllenDesign\\ConfigValidator\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AshAllenDesign\\ConfigValidator\\Providers\\ConfigValidatorProvider"
+            ],
+            "aliases": {
+                "ConfigValidator": "AshAllenDesign\\ConfigValidator\\Facades\\ConfigValidator"
+            }
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "larastan": "vendor/bin/phpstan analyse"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
