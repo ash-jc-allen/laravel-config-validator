@@ -105,7 +105,15 @@ class RunTest extends TestCase
         Config::set('cache.default', null);
 
         $this->expectException(InvalidConfigValueException::class);
-        $this->expectExceptionMessage('The cache.default must be a string.');
+
+        // The validation failed message structure changed in Laravel 10.
+        // So we need to check for both messages depending on the
+        // Laravel framework version.
+        if (version_compare(app()->version(), '10.0.0', '>=')) {
+            $this->expectExceptionMessage('The cache.default field must be a string.');
+        } else {
+            $this->expectExceptionMessage('The cache.default must be a string.');
+        }
 
         $stubFilePath = __DIR__.'/../../Stubs/cache.php';
 
