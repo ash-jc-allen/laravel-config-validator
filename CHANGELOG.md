@@ -1,6 +1,6 @@
 # Changelog
 
-**v.2.5.0 (released 2024-02-27):**
+**v2.5.0 (released 2024-02-27):**
 
 - Added support for Laravel 11. [#62](https://github.com/ash-jc-allen/laravel-config-validator/pull/62)
 
