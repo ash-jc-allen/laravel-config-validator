@@ -105,7 +105,15 @@ class RunTest extends TestCase
         Config::set('cache.default', null);
 
         $this->expectException(InvalidConfigValueException::class);
-        $this->expectExceptionMessage('The cache.default must be a string.');
+
+        // The validation failed message structure changed in Laravel 10.
+        // So we need to check for both messages depending on the
+        // Laravel framework version.
+        if (version_compare(app()->version(), '10.0.0', '>=')) {
+            $this->expectExceptionMessage('The cache.default field must be a string.');
+        } else {
+            $this->expectExceptionMessage('The cache.default must be a string.');
+        }
 
         $stubFilePath = __DIR__.'/../../Stubs/cache.php';
 
@@ -172,24 +180,48 @@ class RunTest extends TestCase
             // testing the error output.
         }
 
-        $this->assertEquals([
-            'cache.default' => [
-                'The cache.default must be a string.',
-                'The cache.default field is required.',
-            ],
-            'cache.prefix' => [
-                'The cache.prefix must be equal to foobar.',
-            ],
-            'mail.from.address' => [
-                'The mail.from.address must be a valid email address.',
-            ],
-            'mail.port' => [
-                'The mail.port must be an integer.',
-            ],
-            'mail.field_with_underscores' => [
-                'The mail.field_with_underscores must be an integer.',
-            ],
-        ], $configValidator->errors());
+        // The validation failed message structure changed in Laravel 10.
+        // So we need to check for both messages depending on the
+        // Laravel framework version.
+        if (version_compare(app()->version(), '10.0.0', '>=')) {
+            $this->assertEquals([
+                'cache.default' => [
+                    'The cache.default field must be a string.',
+                    'The cache.default field is required.',
+                ],
+                'cache.prefix' => [
+                    'The cache.prefix must be equal to foobar.',
+                ],
+                'mail.from.address' => [
+                    'The mail.from.address field must be a valid email address.',
+                ],
+                'mail.port' => [
+                    'The mail.port field must be an integer.',
+                ],
+                'mail.field_with_underscores' => [
+                    'The mail.field_with_underscores field must be an integer.',
+                ],
+            ], $configValidator->errors());
+        } else {
+            $this->assertEquals([
+                'cache.default' => [
+                    'The cache.default must be a string.',
+                    'The cache.default field is required.',
+                ],
+                'cache.prefix' => [
+                    'The cache.prefix must be equal to foobar.',
+                ],
+                'mail.from.address' => [
+                    'The mail.from.address must be a valid email address.',
+                ],
+                'mail.port' => [
+                    'The mail.port must be an integer.',
+                ],
+                'mail.field_with_underscores' => [
+                    'The mail.field_with_underscores must be an integer.',
+                ],
+            ], $configValidator->errors());
+        }
     }
 
     /** @test */
