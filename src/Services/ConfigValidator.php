@@ -96,17 +96,18 @@ class ConfigValidator
     }
 
     /**
-     * Validate a single config file with rules that are passed in inline
-     * rather than being read from a file in the filesystem.
+     * Validate config values  with rules that are passed in inline rather
+     * than being read from a file in the filesystem.
      *
-     * @param string  $configFileKey
-     * @param array<Rule>  $rules
+     * @param array<string,array<Rule>>  $ruleGroups
      *
      * @throws InvalidConfigValueException
      */
-    public function runInline(string $configFileKey, array $rules): bool
+    public function runInline(array $ruleGroups): bool
     {
-        $this->validationRepository->push($configFileKey, $rules);
+        foreach ($ruleGroups as $configKey => $rules) {
+            $this->validationRepository->push($configKey, $rules);
+        }
 
         return $this->runValidator();
     }

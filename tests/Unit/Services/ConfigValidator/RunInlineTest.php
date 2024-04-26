@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Services\ConfigValidator;
 
-use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
-use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use AshAllenDesign\ConfigValidator\Services\Rule;
+use AshAllenDesign\ConfigValidator\Tests\Unit\Stubs\IsFooBar;
 use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Config;
 
@@ -22,14 +21,15 @@ final class RunInlineTest extends TestCase
         Config::set('mail.from.to', 'Ashley Allen');
         Config::set('mail.host', 'a random string');
         Config::set('mail.port', 1234);
+        Config::set('cache.prefix', 'foobar');
 
         $configValidator = new ConfigValidator();
 
         $this->assertTrue(
-            $configValidator->runInline(
-                configFileKey: 'mail',
-                rules: $this->mailRules(),
-            ),
+            $configValidator->runInline([
+                'mail' => $this->mailRules(),
+                'cache' => $this->cacheRules(),
+            ]),
         );
     }
 
@@ -42,10 +42,9 @@ final class RunInlineTest extends TestCase
         $this->expectExceptionMessage('This is a custom message.');
 
         $configValidator = new ConfigValidator();
-        $configValidator->throwExceptionOnFailure(true)->runInline(
-            configFileKey: 'mail',
-            rules: $this->mailRules(),
-        );
+        $configValidator->throwExceptionOnFailure(true)->runInline([
+            'mail' => $this->mailRules(),
+        ]);
     }
 
     /** @test */
@@ -65,8 +64,8 @@ final class RunInlineTest extends TestCase
         }
 
         $configValidator = new ConfigValidator();
-        $configValidator->runInline('cache', [
-            Rule::make('default')->rules(['string', 'required']),
+        $configValidator->runInline([
+            'cache' => $this->cacheRules(),
         ]);
     }
 
@@ -79,6 +78,8 @@ final class RunInlineTest extends TestCase
 
         // Set invalid config values that will have their error messages stored.
         Config::set('mail.from.address', 'INVALID');
+        Config::set('cache.default', null);
+        Config::set('cache.prefix', null);
         Config::set('mail.port', 'INVALID');
         Config::set('mail.field_with_underscores', 'INVALID');
 
@@ -87,7 +88,10 @@ final class RunInlineTest extends TestCase
         $this->assertEquals([], $configValidator->errors());
 
         try {
-            $configValidator->runInline('mail', $this->mailRules());
+            $configValidator->runInline([
+                'mail' => $this->mailRules(),
+                'cache' => $this->cacheRules(),
+            ]);
         } catch (InvalidConfigValueException $e) {
             // Suppress the exception so that we can continue
             // testing the error output.
@@ -98,6 +102,13 @@ final class RunInlineTest extends TestCase
         // Laravel framework version.
         if (version_compare(app()->version(), '10.0.0', '>=')) {
             $this->assertEquals([
+                'cache.default' => [
+                    'The cache.default field must be a string.',
+                    'The cache.default field is required.',
+                ],
+                'cache.prefix' => [
+                    'The cache.prefix must be equal to foobar.',
+                ],
                 'mail.from.address' => [
                     'The mail.from.address field must be a valid email address.',
                 ],
@@ -110,6 +121,13 @@ final class RunInlineTest extends TestCase
             ], $configValidator->errors());
         } else {
             $this->assertEquals([
+                'cache.default' => [
+                    'The cache.default must be a string.',
+                    'The cache.default field is required.',
+                ],
+                'cache.prefix' => [
+                    'The cache.prefix must be equal to foobar.',
+                ],
                 'mail.from.address' => [
                     'The mail.from.address must be a valid email address.',
                 ],
@@ -131,12 +149,9 @@ final class RunInlineTest extends TestCase
 
         $configValidator = new ConfigValidator();
         $this->assertFalse(
-            $configValidator->throwExceptionOnFailure(false)->runInline(
-                configFileKey: 'cache',
-                rules: [
-                    Rule::make('default')->rules(['string', 'required']),
-                ],
-            ),
+            $configValidator->throwExceptionOnFailure(false)->runInline([
+                'cache' => $this->cacheRules(),
+            ]),
         );
     }
 
@@ -148,6 +163,14 @@ final class RunInlineTest extends TestCase
             Rule::make('from.address')->rules(['email', 'required']),
             Rule::make('from.to')->rules(['string', 'required']),
             Rule::make('field_with_underscores')->rules(['integer', 'nullable']),
+        ];
+    }
+
+    private function cacheRules(): array
+    {
+        return [
+            Rule::make('default')->rules(['string', 'required', 'in:apc,array,database,file,memcached,redis,dynamodb']),
+            Rule::make('prefix')->rules([new IsFooBar()]),
         ];
     }
 }

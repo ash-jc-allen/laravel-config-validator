@@ -217,6 +217,33 @@ $configValidator = new ConfigValidator();
 $configValidator->run([], 'app/Custom/Validation');
 ```
 
+##### Running the Validator with Inline Rules
+
+There may be times when you want to run the validator with inline rules instead of using the rules defined in your config validation files. This can be useful if you want to run a one-off validation check, or validate the config values inside a package you maintain.
+
+To do this, you can use the `runInline` method like so:
+
+```php
+use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
+use AshAllenDesign\ConfigValidator\Services\Rule;
+
+$configValidator = new ConfigValidator();
+
+$configValidator->runInline([
+    'app' => [
+        Rule::make('env')->rules(['in:local,production']),
+        Rule::make('debug')->rules(['boolean']),
+    ],
+    'mail' => [
+        Rule::make('driver')->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array']),
+    ],
+]);
+```
+
+In the example above, we're running the validator with inline rules for the `app` and `mail` config files. The rules are the same as the ones we would define in the config validation files.
+
+The behaviour of the `runInline` method is the same as the `run` method. It will throw an exception if the validation fails, or return a boolean value if the `throwExceptionOnFailure` method has been set to `false`.
+
 #### Using the Command
 
 The library comes with a useful command that you can use to validate your config. To use it, you can run the following in
