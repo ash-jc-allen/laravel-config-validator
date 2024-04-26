@@ -1,5 +1,9 @@
 # Changelog
 
+**v2.6.1 (released 2024-04-26):**
+
+- Fixed a bug that prevented deep-nested config items from being validated. [#66](https://github.com/ash-jc-allen/laravel-config-validator/pull/66)
+
 **v2.6.0 (released 2024-04-26):**
 
 - Added a `runInline` method to the validator. [#64](https://github.com/ash-jc-allen/laravel-config-validator/pull/64)
