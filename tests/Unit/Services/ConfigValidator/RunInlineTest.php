@@ -23,12 +23,19 @@ final class RunInlineTest extends TestCase
         Config::set('mail.port', 1234);
         Config::set('cache.prefix', 'foobar');
 
+        Config::set('short-url.tracking.fields.ip_address', true);
+        Config::set('short-url.tracking.fields.user_agent', true);
+
         $configValidator = new ConfigValidator();
 
         $this->assertTrue(
             $configValidator->runInline([
                 'mail' => $this->mailRules(),
                 'cache' => $this->cacheRules(),
+                'short-url' => [
+                    Rule::make('tracking.fields.ip_address')->rules(['required', 'boolean']),
+                    Rule::make('tracking.fields.user_agent')->rules(['required', 'boolean']),
+                ],
             ]),
         );
     }
