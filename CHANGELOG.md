@@ -1,5 +1,9 @@
 # Changelog
 
+**v2.6.0 (released 2024-04-26):**
+
+- Added a `runInline` method to the validator. [#64](https://github.com/ash-jc-allen/laravel-config-validator/pull/64)
+
 **v2.5.0 (released 2024-02-27):**
 
 - Added support for Laravel 11. [#62](https://github.com/ash-jc-allen/laravel-config-validator/pull/62)
