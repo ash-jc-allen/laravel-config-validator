@@ -149,7 +149,10 @@ class ValidationRepository
         // If the config value is nested (e.g. mail.from.address) then we add
         // it differently to standard non-nested fields.
         if (is_array($hydrated[$field])) {
-            $this->configValues[$key][$field] += $hydrated[$field];
+            $this->configValues[$key][array_key_first($hydrated)] = array_merge_recursive(
+                $this->configValues[$key][$field],
+                $hydrated[$field],
+            );
         } else {
             $this->configValues[$key][array_key_first($hydrated)] = $hydrated[array_key_first($hydrated)];
         }
