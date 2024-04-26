@@ -99,7 +99,7 @@ class ConfigValidator
      * Validate config values  with rules that are passed in inline rather
      * than being read from a file in the filesystem.
      *
-     * @param array<string,array<Rule>>  $ruleGroups
+     * @param  array<string,array<Rule>>  $ruleGroups
      *
      * @throws InvalidConfigValueException
      */
