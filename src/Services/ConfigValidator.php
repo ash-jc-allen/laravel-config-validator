@@ -99,6 +99,9 @@ class ConfigValidator
      * Validate a single config file with rules that are passed in inline
      * rather than being read from a file in the filesystem.
      *
+     * @param string  $configFileKey
+     * @param array<Rule>  $rules
+     *
      * @throws InvalidConfigValueException
      */
     public function runInline(string $configFileKey, array $rules): bool
