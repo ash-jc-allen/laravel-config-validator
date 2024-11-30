@@ -41,7 +41,7 @@ class ConfigValidator
      *
      * @param  ValidationRepository|null  $validationRepository
      */
-    public function __construct(ValidationRepository $validationRepository = null)
+    public function __construct(?ValidationRepository $validationRepository = null)
     {
         $this->validationRepository = $validationRepository ?? new ValidationRepository();
     }
@@ -82,7 +82,7 @@ class ConfigValidator
      * @throws DirectoryNotFoundException
      * @throws NoValidationFilesFoundException
      */
-    public function run(array $configFiles = [], string $validationFolderPath = null): bool
+    public function run(array $configFiles = [], ?string $validationFolderPath = null): bool
     {
         $validationFiles = $this->getValidationFiles($configFiles, $validationFolderPath);
 
