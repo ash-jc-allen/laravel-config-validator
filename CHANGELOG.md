@@ -1,5 +1,9 @@
 # Changelog
 
+**v2.7.0 (released 2024-11-30):**
+
+- Added explicit nullable types to support PHP 8.4. [#68](https://github.com/ash-jc-allen/laravel-config-validator/pull/68)
+
 **v2.6.1 (released 2024-04-26):**
 
 - Fixed a bug that prevented deep-nested config items from being validated. [#66](https://github.com/ash-jc-allen/laravel-config-validator/pull/66)
