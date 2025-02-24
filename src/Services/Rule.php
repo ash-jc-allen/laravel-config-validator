@@ -88,7 +88,7 @@ class Rule
     }
 
     /**
-     * @param string[] $environments
+     * @param  string[]  $environments
      */
     public function environments(array $environments): self
     {
