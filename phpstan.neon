@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/larastan/larastan/extension.neon
 
 parameters:
 
@@ -8,6 +8,7 @@ parameters:
 
     level: 6
 
-    ignoreErrors:
+    reportUnmatchedIgnoredErrors: false
 
-    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given.#'

@@ -13,9 +13,9 @@ trait LoadsConfigValidationFiles
      * Get all of the configuration validation files that
      * are set.
      *
-     * @param  array  $configFiles
+     * @param  string[]  $configFiles
      * @param  string|null  $validationFolderPath
-     * @return array
+     * @return array<string,string>
      *
      * @throws DirectoryNotFoundException
      * @throws NoValidationFilesFoundException
@@ -90,7 +90,7 @@ trait LoadsConfigValidationFiles
      * ['cache', 'auth'] were passed in, we would
      * return ['cache.php', 'auth.php'].
      *
-     * @param  array  $configFiles
+     * @param  string[]  $configFiles
      * @return string[]
      */
     protected function determineFilesToRead(array $configFiles = []): array

@@ -88,7 +88,7 @@ class ValidateConfigCommand extends Command
      * inputs to an array of strings that can be
      * passed to the ConfigValidator object.
      *
-     * @return array
+     * @return string[]
      */
     private function determineFilesToValidate(): array
     {
