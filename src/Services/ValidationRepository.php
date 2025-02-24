@@ -3,7 +3,6 @@
 namespace AshAllenDesign\ConfigValidator\Services;
 
 use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class ValidationRepository
 {
@@ -19,7 +18,7 @@ class ValidationRepository
      * An array of rules that are to be used for validating
      * the config values.
      *
-     * @var array<string,array<string|ValidationRule|\Illuminate\Validation\Rule|Closure>>
+     * @var array<string,array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>>
      */
     private array $rules = [];
 

@@ -3,7 +3,6 @@
 namespace AshAllenDesign\ConfigValidator\Services;
 
 use Closure;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class Rule
 {
@@ -23,7 +22,7 @@ class Rule
     /**
      * The validation used for validating the config field.
      *
-     * @var array<string|ValidationRule|\Illuminate\Validation\Rule|Closure>
+     * @var array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>
      */
     private array $rules = [];
 
@@ -111,7 +110,7 @@ class Rule
     /**
      * Get the validation rules set within this rule.
      *
-     * @return array<string|ValidationRule|\Illuminate\Validation\Rule|Closure>
+     * @return array<string||\Illuminate\Validation\Rule|Closure>
      */
     public function getRules(): array
     {
