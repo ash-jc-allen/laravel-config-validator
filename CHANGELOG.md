@@ -1,5 +1,13 @@
 # Changelog
 
+**v2.8.0 (released 2025-02-24):**
+
+- Added support for Laravel 12. [#69](https://github.com/ash-jc-allen/laravel-config-validator/pull/69)
+- Added support for PHPUnit 11. [#72](https://github.com/ash-jc-allen/laravel-config-validator/pull/72)
+- Dropped support for Laravel 8 and 9. [#72](https://github.com/ash-jc-allen/laravel-config-validator/pull/72)
+- Dropped support for PHP 8.0 and 8.1. [#71](https://github.com/ash-jc-allen/laravel-config-validator/pull/71)
+- Migrated from `nunomaduro/larastan` to `larastan/larastan` and added support for Larastan 3. [#70](https://github.com/ash-jc-allen/laravel-config-validator/pull/70)
+
 **v2.7.0 (released 2024-11-30):**
 
 - Added explicit nullable types to support PHP 8.4. [#68](https://github.com/ash-jc-allen/laravel-config-validator/pull/68)
