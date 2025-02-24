@@ -8,7 +8,7 @@ use RuntimeException;
 /**
  * @method static void run()
  * @method static ConfigValidator throwExceptionOnFailure()
- * @method static array errors()
+ * @method static array<string,string[]> errors()
  *
  * @see \AshAllenDesign\ConfigValidator\Services\ConfigValidator
  */

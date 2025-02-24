@@ -24,7 +24,7 @@ class ConfigValidator
     /**
      * An array of the validation error messages.
      *
-     * @var array
+     * @var array<string,string[]>
      */
     private array $errors = [];
 
@@ -49,7 +49,7 @@ class ConfigValidator
     /**
      * Return the validation error messages.
      *
-     * @return array
+     * @return array<string,string[]>
      */
     public function errors(): array
     {
@@ -74,7 +74,7 @@ class ConfigValidator
      * Handle the loading of the config validation files
      * and then validate the config.
      *
-     * @param  array  $configFiles
+     * @param  string[]  $configFiles
      * @param  string|null  $validationFolderPath
      * @return bool
      *

@@ -9,5 +9,4 @@ parameters:
     level: 6
 
     ignoreErrors:
-        - identifier: missingType.iterableValue
         - '#Parameter \#1 \$view of function view expects view-string\|null, string given.#'
