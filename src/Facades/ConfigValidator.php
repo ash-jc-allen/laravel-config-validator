@@ -3,7 +3,6 @@
 namespace AshAllenDesign\ConfigValidator\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use RuntimeException;
 
 /**
  * @method static void run()
