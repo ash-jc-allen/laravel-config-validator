@@ -2,13 +2,15 @@
 
 namespace AshAllenDesign\ConfigValidator\Services;
 
+use Closure;
+
 class ValidationRepository
 {
     /**
      * An array of the config values that are being
      * validated.
      *
-     * @var array
+     * @var array<string,mixed>
      */
     private array $configValues = [];
 
@@ -16,7 +18,7 @@ class ValidationRepository
      * An array of rules that are to be used for validating
      * the config values.
      *
-     * @var array
+     * @var array<string,array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>>
      */
     private array $rules = [];
 
@@ -24,7 +26,7 @@ class ValidationRepository
      * An array of custom messages that are to be used when
      * validating the config values.
      *
-     * @var array
+     * @var array<string,string>
      */
     private array $messages = [];
 
@@ -65,7 +67,7 @@ class ValidationRepository
      * Return the class' rules, config values and messages
      * as an array.
      *
-     * @return array
+     * @return array<string,mixed>
      */
     public function asArray(): array
     {
@@ -115,7 +117,7 @@ class ValidationRepository
      *
      * @param  string  $configKey
      * @param  Rule  $rule
-     * @return array
+     * @return array<string,mixed>
      */
     private function hydrateConfigValueArray(string $configKey, Rule $rule): array
     {

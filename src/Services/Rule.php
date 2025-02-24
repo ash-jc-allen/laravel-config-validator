@@ -2,6 +2,8 @@
 
 namespace AshAllenDesign\ConfigValidator\Services;
 
+use Closure;
+
 class Rule
 {
     public const ENV_PRODUCTION = 'production';
@@ -20,7 +22,7 @@ class Rule
     /**
      * The validation used for validating the config field.
      *
-     * @var array
+     * @var array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>
      */
     private array $rules = [];
 
@@ -28,12 +30,12 @@ class Rule
      * The custom messages being used when validating the
      * config field.
      *
-     * @var array
+     * @var array<string,string>
      */
     private array $messages = [];
 
     /**
-     * @var array
+     * @var string[]
      */
     private array $environments = [];
 
@@ -61,7 +63,7 @@ class Rule
     /**
      * Set the rules used for validating the config.
      *
-     * @param  array  $rules
+     * @param  array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>  $rules
      * @return $this
      */
     public function rules(array $rules): self
@@ -75,7 +77,7 @@ class Rule
      * Set the custom messages used when validating the
      * config.
      *
-     * @param  array  $messages
+     * @param  array<string,string>  $messages
      * @return $this
      */
     public function messages(array $messages): self
@@ -85,6 +87,9 @@ class Rule
         return $this;
     }
 
+    /**
+     * @param  string[]  $environments
+     */
     public function environments(array $environments): self
     {
         $this->environments = array_merge($this->environments, $environments);
@@ -105,7 +110,7 @@ class Rule
     /**
      * Get the validation rules set within this rule.
      *
-     * @return array
+     * @return array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>
      */
     public function getRules(): array
     {
@@ -115,7 +120,7 @@ class Rule
     /**
      * Get the validation messages set within this rule.
      *
-     * @return array
+     * @return array<string,string>
      */
     public function getMessages(): array
     {
@@ -125,7 +130,7 @@ class Rule
     /**
      * Get the app environments set within this rule.
      *
-     * @return array
+     * @return string[]
      */
     public function getEnvironments(): array
     {
