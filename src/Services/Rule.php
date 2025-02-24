@@ -63,7 +63,7 @@ class Rule
     /**
      * Set the rules used for validating the config.
      *
-     * @param  array<string|ValidationRule|\Illuminate\Validation\Rule|Closure>  $rules
+     * @param  array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>  $rules
      * @return $this
      */
     public function rules(array $rules): self
@@ -110,7 +110,7 @@ class Rule
     /**
      * Get the validation rules set within this rule.
      *
-     * @return array<string||\Illuminate\Validation\Rule|Closure>
+     * @return array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>
      */
     public function getRules(): array
     {

@@ -70,6 +70,7 @@ class ValidateConfigCommand extends Command
         }
 
         if (! empty($this->configValidator->errors())) {
+            /** @phpstan-ignore-next-line argument.type */
             render(view('config-validator::validate-config', [
                 'allErrors' => $this->configValidator->errors(),
             ]));

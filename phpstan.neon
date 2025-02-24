@@ -8,5 +8,9 @@ parameters:
 
     level: 6
 
+    reportUnmatchedIgnoredErrors: false
+
     ignoreErrors:
-        - '#Parameter \#1 \$view of function view expects view-string\|null, string given.#'
+        - '#Property AshAllenDesign\\ConfigValidator\\Services\\ValidationRepository\:\:\$rules has unknown class Illuminate\\Contracts\\Validation\\ValidationRule as its type.#'
+        - '#Property AshAllenDesign\\ConfigValidator\\Services\\Rule\:\:\$rules has unknown class Illuminate\\Contracts\\Validation\\ValidationRule as its type.#'
+        - '#Parameter \$rules of method AshAllenDesign\\ConfigValidator\\Services\\Rule\:\:rules\(\) has invalid type AshAllenDesign\\ConfigValidator\\Services\\ValidationRule.#'
