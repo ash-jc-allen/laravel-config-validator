@@ -83,7 +83,7 @@ class RunTest extends TestCase
     }
 
     /**
-     * This test is for the following issue: https://github.com/ash-jc-allen/laravel-config-validator/issues/75
+     * This test is for the following issue: https://github.com/ash-jc-allen/laravel-config-validator/issues/75.
      *
      * @test
      */
