@@ -3,6 +3,7 @@
 namespace AshAllenDesign\ConfigValidator\Services;
 
 use Closure;
+use Illuminate\Support\Arr;
 
 class ValidationRepository
 {
@@ -101,37 +102,6 @@ class ValidationRepository
     }
 
     /**
-     * This takes a config field and hydrates it into a
-     * nested array that we can validate against. For
-     * example, we can use it convert the config
-     * item 'mail.from.address' that is equal
-     * to 'example@domain.com' to this...
-     *
-     * [
-     *     'mail' => [
-     *         'from' => [
-     *             'address' => 'example@domain.com'
-     *         ]
-     *     ]
-     * ]
-     *
-     * @param  string  $configKey
-     * @param  Rule  $rule
-     * @return array<string,mixed>
-     */
-    private function hydrateConfigValueArray(string $configKey, Rule $rule): array
-    {
-        $keys = explode('.', $rule->getFieldName());
-        $value = config($configKey.'.'.$rule->getFieldName());
-
-        while ($key = array_pop($keys)) {
-            $value = [$key => $value];
-        }
-
-        return $value;
-    }
-
-    /**
      * Fetch the current config values that are set in the
      * system and then add them to the repository for
      * validating.
@@ -141,22 +111,10 @@ class ValidationRepository
      */
     private function fetchCurrentConfigValues(string $key, Rule $rule): void
     {
-        $hydrated = $this->hydrateConfigValueArray($key, $rule);
-        $field = array_keys($hydrated)[0];
-
-        if (empty($this->configValues[$key][$field])) {
-            $this->configValues[$key][$field] = [];
-        }
-
-        // If the config value is nested (e.g. mail.from.address) then we add
-        // it differently to standard non-nested fields.
-        if (is_array($hydrated[$field])) {
-            $this->configValues[$key][$field] = array_merge_recursive(
-                $this->configValues[$key][$field],
-                $hydrated[$field],
-            );
-        } else {
-            $this->configValues[$key][array_key_first($hydrated)] = $hydrated[array_key_first($hydrated)];
-        }
+        Arr::set(
+            array: $this->configValues[$key],
+            key: $rule->getFieldName(),
+            value: config($key.'.'.$rule->getFieldName()),
+        );
     }
 }

@@ -82,6 +82,25 @@ class RunTest extends TestCase
         $this->assertTrue($configValidator->run(['mail']));
     }
 
+    /**
+     * This test is for the following issue: https://github.com/ash-jc-allen/laravel-config-validator/issues/75.
+     *
+     * @test
+     */
+    public function validator_can_be_run_and_read_nested_fields_correctly(): void
+    {
+        Config::set('services.cms.key', 'key here');
+        Config::set('services.cms.secret', 'secret here');
+
+        $servicesStubFilePath = __DIR__.'/../../Stubs/services.php';
+
+        File::makeDirectory(base_path('config-validation'));
+        File::put(base_path('config-validation/services.php'), file_get_contents($servicesStubFilePath));
+
+        $configValidator = new ConfigValidator();
+        $this->assertTrue($configValidator->run(['services']));
+    }
+
     /** @test */
     public function exception_is_thrown_if_the_validation_fails_with_a_custom_rule_message()
     {
