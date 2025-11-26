@@ -1,5 +1,9 @@
 # Changelog
 
+**v2.9.1 (released 2025-11-27):**
+
+- Fixed a bug that sometimes read non-array config values as arrays. [#77](https://github.com/ash-jc-allen/laravel-config-validator/pull/77)
+
 **v2.9.0 (released 2025-10-17):**
 
 - Added `.gitattributes` file. [#74](https://github.com/ash-jc-allen/laravel-config-validator/pull/74)
