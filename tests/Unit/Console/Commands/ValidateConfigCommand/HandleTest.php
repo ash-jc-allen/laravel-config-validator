@@ -2,7 +2,6 @@
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Console\Commands\ValidateConfigCommand;
 
-use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 use function Termwind\renderUsing;

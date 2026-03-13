@@ -2,10 +2,10 @@
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Console\Commands\ValidationMakeCommand;
 
-use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ValidationMakeCommandTest extends TestCase
 {
