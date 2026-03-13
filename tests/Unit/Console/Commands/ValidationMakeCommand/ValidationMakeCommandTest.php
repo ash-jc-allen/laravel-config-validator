@@ -7,7 +7,7 @@ use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
-class ValidationMakeCommandTest extends TestCase
+final class ValidationMakeCommandTest extends TestCase
 {
     protected function setUp(): void
     {

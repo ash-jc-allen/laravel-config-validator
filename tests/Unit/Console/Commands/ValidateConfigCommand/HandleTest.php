@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 use function Termwind\renderUsing;
 
-class HandleTest extends TestCase
+final class HandleTest extends TestCase
 {
     private BufferedOutput $output;
 

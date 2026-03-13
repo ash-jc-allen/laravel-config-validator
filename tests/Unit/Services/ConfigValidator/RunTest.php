@@ -11,7 +11,7 @@ use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
-class RunTest extends TestCase
+final class RunTest extends TestCase
 {
     #[Test]
     public function validator_can_be_run_in_default_location_and_all_files(): void
