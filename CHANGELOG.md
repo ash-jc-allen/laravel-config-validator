@@ -1,5 +1,11 @@
 # Changelog
 
+**v2.10.0 (released 2026-03-13):**
+
+- Added support for Laravel 13. [#78](https://github.com/ash-jc-allen/laravel-config-validator/pull/78)
+- Updated test suite to use newer PHPUnit features and syntax. [#79](https://github.com/ash-jc-allen/laravel-config-validator/pull/79)
+- Run CI workflows with PHP 8.5. [#85](https://github.com/ash-jc-allen/laravel-config-validator/pull/85)
+
 **v2.9.1 (released 2025-11-27):**
 
 - Fixed a bug that sometimes read non-array config values as arrays. [#77](https://github.com/ash-jc-allen/laravel-config-validator/pull/77)
