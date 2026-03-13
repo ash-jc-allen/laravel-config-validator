@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Services\ConfigValidator;
 
-use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use AshAllenDesign\ConfigValidator\Services\Rule;
 use AshAllenDesign\ConfigValidator\Tests\Unit\Stubs\IsFooBar;
 use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Config;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RunInlineTest extends TestCase
 {
