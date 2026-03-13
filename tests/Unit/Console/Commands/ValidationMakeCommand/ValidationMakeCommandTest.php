@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\File;
 
 class ValidationMakeCommandTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
