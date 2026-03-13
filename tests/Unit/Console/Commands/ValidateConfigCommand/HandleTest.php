@@ -2,6 +2,7 @@
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Console\Commands\ValidateConfigCommand;
 
+use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
@@ -25,7 +26,7 @@ class HandleTest extends TestCase
         File::deleteDirectory(base_path('config-validation'));
     }
 
-    /** @test */
+    #[Test]
     public function command_can_be_run(): void
     {
         Config::set('cache.default', 'array');
@@ -38,7 +39,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('Config validation passed!', $output);
     }
 
-    /** @test */
+    #[Test]
     public function command_can_be_run_with_the_path_option(): void
     {
         $this->mock(ConfigValidator::class, function ($mock) {
@@ -51,7 +52,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('Config validation passed!', $output);
     }
 
-    /** @test */
+    #[Test]
     public function command_can_be_run_with_the_files_option(): void
     {
         $this->mock(ConfigValidator::class, function ($mock) {
@@ -65,7 +66,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('Config validation passed!', $output);
     }
 
-    /** @test */
+    #[Test]
     public function error_is_displayed_if_a_config_validation_fails(): void
     {
         Config::set('cache.field', ['invalid', 'items', 'in', 'an', 'array']);
@@ -116,7 +117,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('The mail.empty must be a string.', $output);
     }
 
-    /** @test */
+    #[Test]
     public function error_is_displayed_if_a_directory_does_not_exist(): void
     {
         $this->mock(ConfigValidator::class, function (MockInterface $mock): void {
@@ -134,7 +135,7 @@ class HandleTest extends TestCase
         $this->assertStringContainsString('The directory does not exist.', $output);
     }
 
-    /** @test */
+    #[Test]
     public function error_is_displayed_if_a_directory_is_empty(): void
     {
         $this->mock(ConfigValidator::class, function (MockInterface $mock): void {

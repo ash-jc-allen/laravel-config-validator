@@ -2,6 +2,7 @@
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Services\ConfigValidator;
 
+use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Exceptions\DirectoryNotFoundException;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Exceptions\NoValidationFilesFoundException;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class RunTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function validator_can_be_run_in_default_location_and_all_files()
     {
         // Set valid config values that will pass all of the validation rules.
@@ -33,7 +34,7 @@ class RunTest extends TestCase
         $this->assertTrue($configValidator->run());
     }
 
-    /** @test */
+    #[Test]
     public function validator_can_be_run_in_a_custom_location()
     {
         // Set valid config values that will pass all of the validation rules.
@@ -56,7 +57,7 @@ class RunTest extends TestCase
         $this->assertTrue($configValidator->run([], 'custom-validation'));
     }
 
-    /** @test */
+    #[Test]
     public function validator_can_be_run_with_custom_files()
     {
         // Set valid config values that will pass all of the validation rules.
@@ -84,9 +85,8 @@ class RunTest extends TestCase
 
     /**
      * This test is for the following issue: https://github.com/ash-jc-allen/laravel-config-validator/issues/75.
-     *
-     * @test
      */
+    #[Test]
     public function validator_can_be_run_and_read_nested_fields_correctly(): void
     {
         Config::set('services.cms.key', 'key here');
@@ -101,7 +101,7 @@ class RunTest extends TestCase
         $this->assertTrue($configValidator->run(['services']));
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_validation_fails_with_a_custom_rule_message()
     {
         Config::set('mail.host', null);
@@ -118,7 +118,7 @@ class RunTest extends TestCase
         $configValidator->throwExceptionOnFailure(true)->run();
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_validation_fails()
     {
         Config::set('cache.default', null);
@@ -143,7 +143,7 @@ class RunTest extends TestCase
         $configValidator->run();
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_directory_does_not_exist()
     {
         $this->expectException(DirectoryNotFoundException::class);
@@ -153,7 +153,7 @@ class RunTest extends TestCase
         $configValidator->run([], 'invalid_path');
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_directory_contains_no_files()
     {
         $this->expectException(NoValidationFilesFoundException::class);
@@ -167,7 +167,7 @@ class RunTest extends TestCase
         $configValidator->run();
     }
 
-    /** @test */
+    #[Test]
     public function validation_error_messages_can_be_returned()
     {
         // Set valid config values that will pass all of the validation rules.
@@ -243,7 +243,7 @@ class RunTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_not_thrown_if_it_is_disabled_before_running_the_validator()
     {
         // Set invalid config values that will have their error messages stored.

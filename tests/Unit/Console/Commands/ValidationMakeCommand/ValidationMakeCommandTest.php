@@ -2,6 +2,7 @@
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Console\Commands\ValidationMakeCommand;
 
+use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Tests\Unit\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -15,7 +16,7 @@ class ValidationMakeCommandTest extends TestCase
         File::deleteDirectory(base_path('config-validation'));
     }
 
-    /** @test */
+    #[Test]
     public function validation_file_can_be_created()
     {
         $validationFile = base_path('config-validation/app.php');
