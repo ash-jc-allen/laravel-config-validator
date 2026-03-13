@@ -24,6 +24,8 @@ final class HandleTest extends TestCase
         parent::setUp();
 
         File::deleteDirectory(base_path('config-validation'));
+
+        Config::set('cache.prefix', 'laravel_cache');
     }
 
     #[Test]
