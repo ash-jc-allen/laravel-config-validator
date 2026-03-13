@@ -17,7 +17,7 @@ class ValidationMakeCommandTest extends TestCase
     }
 
     #[Test]
-    public function validation_file_can_be_created()
+    public function validation_file_can_be_created(): void
     {
         $validationFile = base_path('config-validation/app.php');
 
