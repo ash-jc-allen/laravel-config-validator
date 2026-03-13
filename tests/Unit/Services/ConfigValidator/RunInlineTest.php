@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AshAllenDesign\ConfigValidator\Tests\Unit\Services\ConfigValidator;
 
+use PHPUnit\Framework\Attributes\Test;
 use AshAllenDesign\ConfigValidator\Exceptions\InvalidConfigValueException;
 use AshAllenDesign\ConfigValidator\Services\ConfigValidator;
 use AshAllenDesign\ConfigValidator\Services\Rule;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 
 final class RunInlineTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function validator_can_be_run_inline_and_pass(): void
     {
         // Set valid config values that will pass all the validation rules.
@@ -40,7 +41,7 @@ final class RunInlineTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_validation_fails_with_a_custom_rule_message(): void
     {
         Config::set('mail.host', null);
@@ -54,7 +55,7 @@ final class RunInlineTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_the_validation_fails(): void
     {
         Config::set('cache.default', null);
@@ -76,7 +77,7 @@ final class RunInlineTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function validation_error_messages_can_be_returned(): void
     {
         // Set valid config values that will pass all of the validation rules.
@@ -148,7 +149,7 @@ final class RunInlineTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_not_thrown_if_it_is_disabled_before_running_the_validator(): void
     {
         // Set invalid config values that will have their error messages stored.
