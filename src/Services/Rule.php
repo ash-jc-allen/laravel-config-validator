@@ -14,10 +14,8 @@ class Rule
 
     /**
      * The config field name being validated.
-     *
-     * @var string
      */
-    private string $fieldName;
+    private readonly string $fieldName;
 
     /**
      * The validation used for validating the config field.
@@ -41,8 +39,6 @@ class Rule
 
     /**
      * Rule constructor.
-     *
-     * @param  string  $fieldName
      */
     public function __construct(string $fieldName)
     {
@@ -51,9 +47,6 @@ class Rule
 
     /**
      * A helper method used for creating a new rule.
-     *
-     * @param  string  $fieldName
-     * @return Rule
      */
     public static function make(string $fieldName): Rule
     {
@@ -99,8 +92,6 @@ class Rule
 
     /**
      * Get the config field name that this rule relates to.
-     *
-     * @return string
      */
     public function getFieldName(): string
     {

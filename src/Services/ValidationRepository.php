@@ -39,12 +39,11 @@ class ValidationRepository
      * environments won't be stored and will just be
      * skipped.
      *
-     * @param  string  $key
      * @param  Rule[]  $rules
      */
     public function push(string $key, array $rules): void
     {
-        foreach ($rules as $field => $rule) {
+        foreach ($rules as $rule) {
             if (! $this->shouldValidateUsingThisRule($rule)) {
                 continue;
             }
@@ -86,15 +85,12 @@ class ValidationRepository
      * the rule. If it hasn't, we can add the rule.
      * If it has, we can only add the rule if the
      * environment matches.
-     *
-     * @param  Rule  $rule
-     * @return bool
      */
     private function shouldValidateUsingThisRule(Rule $rule): bool
     {
         $environments = $rule->getEnvironments();
 
-        if (empty($environments)) {
+        if ($environments === []) {
             return true;
         }
 
@@ -105,9 +101,6 @@ class ValidationRepository
      * Fetch the current config values that are set in the
      * system and then add them to the repository for
      * validating.
-     *
-     * @param  string  $key
-     * @param  Rule  $rule
      */
     private function fetchCurrentConfigValues(string $key, Rule $rule): void
     {

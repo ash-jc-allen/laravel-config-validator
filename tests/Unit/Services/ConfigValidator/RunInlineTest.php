@@ -100,7 +100,7 @@ final class RunInlineTest extends TestCase
                 'mail' => $this->mailRules(),
                 'cache' => $this->cacheRules(),
             ]);
-        } catch (InvalidConfigValueException $e) {
+        } catch (InvalidConfigValueException) {
             // Suppress the exception so that we can continue
             // testing the error output.
         }

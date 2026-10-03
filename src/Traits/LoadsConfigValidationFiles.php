@@ -14,7 +14,6 @@ trait LoadsConfigValidationFiles
      * are set.
      *
      * @param  string[]  $configFiles
-     * @param  string|null  $validationFolderPath
      * @return array<string,string>
      *
      * @throws DirectoryNotFoundException
@@ -49,8 +48,6 @@ trait LoadsConfigValidationFiles
      * folder does not exist, an exception will
      * be thrown.
      *
-     * @param  string|null  $validationFolderPath
-     * @return string
      *
      * @throws DirectoryNotFoundException
      */
@@ -67,10 +64,6 @@ trait LoadsConfigValidationFiles
 
     /**
      * Get the configuration file nesting path.
-     *
-     * @param  SplFileInfo  $file
-     * @param  string  $configPath
-     * @return string
      */
     protected function getNestedDirectory(SplFileInfo $file, string $configPath): string
     {
@@ -95,12 +88,10 @@ trait LoadsConfigValidationFiles
      */
     protected function determineFilesToRead(array $configFiles = []): array
     {
-        if (empty($configFiles)) {
+        if ($configFiles === []) {
             return ['*.php'];
         }
 
-        return array_map(static function (string $configValue): string {
-            return $configValue.'.php';
-        }, $configFiles);
+        return array_map(static fn(string $configValue): string => $configValue.'.php', $configFiles);
     }
 }

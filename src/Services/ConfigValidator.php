@@ -16,8 +16,6 @@ class ConfigValidator
      * The repository that holds the config values being
      * validated, along with the rules and messages
      * used for running the validation.
-     *
-     * @var ValidationRepository
      */
     private ValidationRepository $validationRepository;
 
@@ -31,15 +29,11 @@ class ConfigValidator
     /**
      * Specifies whether if an exception should be thrown
      * if the config validation fails.
-     *
-     * @var bool
      */
     private bool $throwExceptionOnFailure = true;
 
     /**
      * ConfigValidator constructor.
-     *
-     * @param  ValidationRepository|null  $validationRepository
      */
     public function __construct(?ValidationRepository $validationRepository = null)
     {
@@ -59,9 +53,6 @@ class ConfigValidator
     /**
      * Determine whether an exception should be thrown if
      * the validation fails.
-     *
-     * @param  bool  $throwException
-     * @return ConfigValidator
      */
     public function throwExceptionOnFailure(bool $throwException = true): self
     {
@@ -75,8 +66,6 @@ class ConfigValidator
      * and then validate the config.
      *
      * @param  string[]  $configFiles
-     * @param  string|null  $validationFolderPath
-     * @return bool
      *
      * @throws InvalidConfigValueException
      * @throws DirectoryNotFoundException
@@ -119,7 +108,6 @@ class ConfigValidator
      * will be used as the message in the thrown
      * exception.
      *
-     * @return bool
      *
      * @throws InvalidConfigValueException
      */
