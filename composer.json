@@ -59,7 +59,13 @@
         "cs": "vendor/bin/php-cs-fixer check",
         "cs:fix": "vendor/bin/php-cs-fixer fix",
         "rector": "vendor/bin/rector process",
-        "rector:check": "vendor/bin/rector process --dry-run"
+        "rector:check": "vendor/bin/rector process --dry-run",
+        "finalise": [
+            "@larastan",
+            "@test",
+            "@rector",
+            "@cs:fix"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
