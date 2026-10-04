@@ -57,7 +57,6 @@ class Rule
      * Set the rules used for validating the config.
      *
      * @param  array<string|\Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Validation\Rule|Closure>  $rules
-     * @return $this
      */
     public function rules(array $rules): self
     {
@@ -71,7 +70,6 @@ class Rule
      * config.
      *
      * @param  array<string,string>  $messages
-     * @return $this
      */
     public function messages(array $messages): self
     {
