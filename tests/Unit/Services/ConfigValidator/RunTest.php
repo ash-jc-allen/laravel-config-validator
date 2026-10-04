@@ -194,7 +194,7 @@ final class RunTest extends TestCase
 
         try {
             $configValidator->run();
-        } catch (InvalidConfigValueException $e) {
+        } catch (InvalidConfigValueException) {
             // Suppress the exception so that we can continue
             // testing the error output.
         }

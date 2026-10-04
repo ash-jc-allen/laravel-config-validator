@@ -31,15 +31,11 @@ class ValidateConfigCommand extends Command
 
     /**
      * The object that is used for validating the config.
-     *
-     * @var ConfigValidator
      */
-    private ConfigValidator $configValidator;
+    private readonly ConfigValidator $configValidator;
 
     /**
      * Create a new command instance.
-     *
-     * @param  ConfigValidator  $configValidator
      */
     public function __construct(ConfigValidator $configValidator)
     {
@@ -51,7 +47,6 @@ class ValidateConfigCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return int
      *
      * @throws DirectoryNotFoundException
      * @throws InvalidConfigValueException
@@ -69,7 +64,7 @@ class ValidateConfigCommand extends Command
             return self::FAILURE;
         }
 
-        if (! empty($this->configValidator->errors())) {
+        if ($this->configValidator->errors() !== []) {
             render(view('config-validator::validate-config', [
                 'allErrors' => $this->configValidator->errors(),
             ]));
@@ -96,7 +91,7 @@ class ValidateConfigCommand extends Command
 
         foreach ($this->option('files') as $fileOption) {
             if (Str::contains($fileOption, ',')) {
-                $exploded = explode(',', $fileOption);
+                $exploded = explode(',', (string) $fileOption);
 
                 $filesToValidate = array_merge($filesToValidate, $exploded);
 

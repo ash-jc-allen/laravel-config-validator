@@ -30,7 +30,8 @@
         "larastan/larastan": "^1.0|^2.0|^3.0",
         "orchestra/testbench": "^9.0|^10.0|^11.0",
         "phpunit/phpunit": "^9.0|^10.5|^11.5.3|^12.5.12",
-        "friendsofphp/php-cs-fixer": "^3.88"
+        "friendsofphp/php-cs-fixer": "^3.88",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -56,7 +57,15 @@
         "test": "vendor/bin/phpunit",
         "larastan": "vendor/bin/phpstan analyse",
         "cs": "vendor/bin/php-cs-fixer check",
-        "cs:fix": "vendor/bin/php-cs-fixer fix"
+        "cs:fix": "vendor/bin/php-cs-fixer fix",
+        "rector": "vendor/bin/rector process",
+        "rector:check": "vendor/bin/rector process --dry-run",
+        "finalise": [
+            "@larastan",
+            "@test",
+            "@rector",
+            "@cs:fix"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

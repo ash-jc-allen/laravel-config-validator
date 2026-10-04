@@ -17,8 +17,6 @@ use function Termwind\renderUsing;
 
 final class HandleTest extends TestCase
 {
-    private BufferedOutput $output;
-
     protected function setUp(): void
     {
         parent::setUp();
