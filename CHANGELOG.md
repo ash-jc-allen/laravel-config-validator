@@ -1,5 +1,14 @@
 # Changelog
 
+**Unreleased:**
+
+- Added Rector for automated code refactoring and added a Rector CI workflow. [#88](https://github.com/ash-jc-allen/laravel-config-validator/pull/88)
+- Replaced StyleCI with PHP CS Fixer and added a code style CI workflow. [#91](https://github.com/ash-jc-allen/laravel-config-validator/pull/91)
+- Dropped support for Laravel 10. [#90](https://github.com/ash-jc-allen/laravel-config-validator/pull/90)
+- Added a `composer finalise` script to run static analysis, tests, Rector, and code style fixes. [#88](https://github.com/ash-jc-allen/laravel-config-validator/pull/88)
+- Pinned external GitHub Actions to specific versions. [#87](https://github.com/ash-jc-allen/laravel-config-validator/pull/87)
+- Added a Laravel compatibility badge to the README.
+
 **v2.10.0 (released 2026-03-13):**
 
 - Added support for Laravel 13. [#78](https://github.com/ash-jc-allen/laravel-config-validator/pull/78)
