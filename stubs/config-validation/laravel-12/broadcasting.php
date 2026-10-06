@@ -3,7 +3,7 @@
 use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
-    Rule::make('default')->rules(['string']),
+    Rule::make('default')->rules(['nullable', 'string']),
 
     Rule::make('connections')->rules(['array']),
 

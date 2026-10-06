@@ -7,7 +7,7 @@ return [
 
     Rule::make('deprecations')->rules(['array']),
 
-    Rule::make('deprecations.channel')->rules(['string']),
+    Rule::make('deprecations.channel')->rules(['nullable', 'string']),
 
     Rule::make('deprecations.trace')->rules(['boolean']),
 
