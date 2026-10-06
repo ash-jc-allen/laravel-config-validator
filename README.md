@@ -61,15 +61,21 @@ composer require ashallendesign/laravel-config-validator
 
 ### Publishing the Default Rulesets
 
-To get you started with validating your app's config, Laravel Config Validator comes with some default rulesets. To start
-using these rulesets, you can publish them using the following command:
+Laravel Config Validator includes separate default rulesets for Laravel 11, 12, and 13. Run the command that matches your app's Laravel version:
 
 ```bash
-php artisan vendor:publish --tag=config-validator-defaults
+# Laravel 11
+php artisan vendor:publish --tag=config-validator-defaults-laravel-11
+
+# Laravel 12
+php artisan vendor:publish --tag=config-validator-defaults-laravel-12
+
+# Laravel 13
+php artisan vendor:publish --tag=config-validator-defaults-laravel-13
 ```
 
-The above command will copy the validation files and place in a ` config-validation ` folder in your project's root. These rules
-are just to get you started, so there are likely going to be rule in the files that don't apply to your app. So, once you've
+The above commands will copy the validation files and place in a `config-validation` folder in your project's root. These rules
+are just to get you started, so there are likely going to be rules in the files that don't apply to your app. Once you've
 published them, feel free to delete them or edit them as much as you'd like.
 
 ## Usage
