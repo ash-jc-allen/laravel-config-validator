@@ -22,10 +22,12 @@ class ConfigValidatorProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Publish the default config validation rules.
-        $this->publishes([
-            __DIR__.'/../../stubs/config-validation' => base_path('config-validation'),
-        ], 'config-validator-defaults');
+        // Publish the default config validation rules for each Laravel version.
+        foreach ([11, 12, 13] as $version) {
+            $this->publishes([
+                __DIR__.'/../../stubs/config-validation/laravel-'.$version => base_path('config-validation'),
+            ], 'config-validator-defaults-laravel-'.$version);
+        }
 
         if ($this->app->runningInConsole()) {
             $this->loadViewsFrom(__DIR__.'/../../resources/views', 'config-validator');
