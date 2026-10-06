@@ -17,19 +17,11 @@ return [
 
     Rule::make('guards.web.provider')->rules(['string']),
 
-    Rule::make('guards.api')->rules(['array']),
-
-    Rule::make('guards.api.driver')->rules(['string']),
-
-    Rule::make('guards.api.provider')->rules(['string']),
-
-    Rule::make('guards.api.hash')->rules(['bool']),
-
     Rule::make('providers')->rules(['array']),
 
     Rule::make('providers.users')->rules(['array']),
 
-    Rule::make('providers.users.driver')->rules(['string', 'in:eloquent,database']),
+    Rule::make('providers.users.driver')->rules(['string']),
 
     Rule::make('providers.users.model')->rules(['string']),
 

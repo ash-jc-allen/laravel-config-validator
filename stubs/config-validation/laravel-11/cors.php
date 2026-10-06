@@ -13,8 +13,9 @@ return [
 
     Rule::make('allowed_headers')->rules(['array']),
 
+    Rule::make('exposed_headers')->rules(['array']),
+
     Rule::make('max_age')->rules(['integer']),
 
-    Rule::make('supports_credentials')->rules(['bool']),
-
+    Rule::make('supports_credentials')->rules(['boolean']),
 ];
