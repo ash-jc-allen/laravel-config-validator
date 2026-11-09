@@ -1,7 +1,8 @@
 # Changelog
 
-**Unreleased:**
+**v3.0.0 (released 2026-11-09):**
 
+- Added separate default rulesets for Laravel 11, 12, and 13, and removed legacy default rulesets. [#92](https://github.com/ash-jc-allen/laravel-config-validator/pull/92)
 - Added Rector for automated code refactoring and added a Rector CI workflow. [#88](https://github.com/ash-jc-allen/laravel-config-validator/pull/88)
 - Replaced StyleCI with PHP CS Fixer and added a code style CI workflow. [#91](https://github.com/ash-jc-allen/laravel-config-validator/pull/91)
 - Dropped support for Laravel 10. [#90](https://github.com/ash-jc-allen/laravel-config-validator/pull/90)
