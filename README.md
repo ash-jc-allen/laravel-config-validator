@@ -6,7 +6,7 @@
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/v/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Latest Version on Packagist"></a>
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/dt/ashallendesign/laravel-config-validator.svg?style=flat-square" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/ashallendesign/laravel-config-validator"><img src="https://img.shields.io/packagist/php-v/ashallendesign/laravel-config-validator?style=flat-square" alt="PHP from Packagist"></a>
-<a href="https://github.com/ash-jc-allen/laravel-config-validator/blob/master/LICENSE"><img src="https://img.shields.io/github/license/ash-jc-allen/laravel-config-validator?style=flat-square" alt="GitHub license"></a>
+<a href="https://github.com/ash-jc-allen/laravel-config-validator/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ash-jc-allen/laravel-config-validator?style=flat-square" alt="GitHub license"></a>
 <a href="https://github.com/ash-jc-allen/laravel-config-validator/blob/master/composer.json"><img src="https://badge.laravel.cloud/badge/ashallendesign/laravel-config-validator?style=flat" alt="Laravel Compatibility"></a>
 </p>
 
@@ -28,6 +28,7 @@
         - [Running the Validation Manually](#running-the-validation-manually)
             - [Only Running on Selected Config Files](#only-running-on-selected-config-files)
             - [Custom Folder Path](#custom-folder-path)
+        - [Running the Validator with Inline Rules](#running-the-validator-with-inline-rules)
         - [Using the Command](#using-the-command)
             - [Only Running on Selected Config Files (Command)](#only-running-on-selected-config-files-command)
             - [Custom Folder Path (Command)](#custom-folder-path-command)
@@ -108,9 +109,9 @@ Once you have your ruleset file created in the ``` config-validation ``` folder,
 rules.
 
 Under the hood, Laravel Config Validator uses the built-in ``` Validator ``` class, so it should seem pretty familiar
-to work with. To check out the available Laravel validation rules that can be used, [click here](https://laravel.com/docs/8.x/validation#available-validation-rules).
+to work with. To check out the available Laravel validation rules that can be used, [click here](https://laravel.com/docs/13.x/validation#available-validation-rules).
 
-As an example, we might want to add a config validation rule to ensure that the ``` driver ``` field in the ``` app/mail.php ```
+As an example, we might want to add a config validation rule to ensure that the ``` default ``` field in the ``` config/mail.php ```
 file is a supported field. To do this, we could create a file at ``` config-validation/mail.php ``` with the following:
 
 ```php
@@ -119,7 +120,7 @@ file is a supported field. To do this, we could create a file at ``` config-vali
 use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
-    Rule::make('driver')->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array']),
+    Rule::make('default')->rules(['in:smtp,sendmail,ses,postmark,resend,log,array,failover,roundrobin']),
     // ...
 ];
 ```
@@ -130,7 +131,7 @@ There may be times when you want to override the error message for a specific va
 in an array containing the messages to the ``` ->messages() ``` method for a ``` Rule ```. This array should follow the same
 pattern that would be used in a standard Laravel Validator object.
 
-As an example, we might want to add a config validation rule to ensure that the ``` driver ``` field in the ``` app/mail.php ```
+As an example, we might want to add a config validation rule to ensure that the ``` default ``` field in the ``` config/mail.php ```
 file is a supported field and also use a custom error message. To do this, we could update our validation file to the following:
 
 ```php
@@ -139,9 +140,9 @@ file is a supported field and also use a custom error message. To do this, we co
 use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
-    Rule::make('driver')
-        ->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array'])
-        ->messages(['in' => 'The mail driver is invalid']),
+    Rule::make('default')
+        ->rules(['in:smtp,sendmail,ses,postmark,resend,log,array,failover,roundrobin'])
+        ->messages(['in' => 'The default mailer is invalid']),
     // ...
 ];
 ```
@@ -162,12 +163,12 @@ The following example shows how you could set 2 different rules, one for product
 use AshAllenDesign\ConfigValidator\Services\Rule;
 
 return [
-    Rule::make('driver')
-        ->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array'])
+    Rule::make('default')
+        ->rules(['in:smtp,sendmail,ses,postmark,resend,log,array,failover,roundrobin'])
         ->environments([Rule::ENV_LOCAL]),
     
-    Rule::make('driver')
-        ->rules(['in:mailgun'])
+    Rule::make('default')
+        ->rules(['in:ses'])
         ->environments([Rule::ENV_PRODUCTION])
 ];
 ```
@@ -213,7 +214,7 @@ $configValidator->run(['auth']);
 
 ##### Custom Folder Path
 
-If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
+If you aren't storing your validation files in the default ``` config-validation ``` folder, you can pass a custom folder path
 into the ``` ->run() ``` method as the second parameter. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
 could use the following:
 
@@ -241,7 +242,7 @@ $configValidator->runInline([
         Rule::make('debug')->rules(['boolean']),
     ],
     'mail' => [
-        Rule::make('driver')->rules(['in:smtp,sendmail,mailgun,ses,postmark,log,array']),
+        Rule::make('default')->rules(['in:smtp,sendmail,ses,postmark,resend,log,array,failover,roundrobin']),
     ],
 ]);
 ```
@@ -277,7 +278,7 @@ php artisan config:validate --files=auth,app
 
 ##### Custom Folder Path (Command)
 
-If you aren't storing your validation files in the default ``` config/validation ``` folder, you can pass a custom folder path
+If you aren't storing your validation files in the default ``` config-validation ``` folder, you can pass a custom folder path
 into the ``` --path ``` option. As an example, if you had the files stored in a ``` app/Custom/Validation ``` folder, you
 could use the following:
 
@@ -337,7 +338,7 @@ $errors = $configValidator->errors();
 
 ### Facade
 
-If you prefer to use facades in Laravel, you can choose to use the provided ``` ConfigValidator ``` facade instead of instantiating the ``` AshAllenDesign\ConfigValidator\Classes\ConfigValidator ```
+If you prefer to use facades in Laravel, you can choose to use the provided ``` ConfigValidator ``` facade instead of instantiating the ``` AshAllenDesign\ConfigValidator\Services\ConfigValidator ```
 class manually.
 
 The example below shows an example of how you could use the facade to run the config validation:

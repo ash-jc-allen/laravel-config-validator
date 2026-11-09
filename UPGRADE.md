@@ -2,7 +2,31 @@
 
 ## Contents
 
+- [Upgrading from 2.* to 3.0.0](#upgrading-from-2-to-300)
 - [Upgrading from 1.* to 2.0.0](#upgrading-from-1-to-200)
+
+## Upgrading from 2.* to 3.0.0
+
+### Minimum Laravel Version
+
+As of v3.0.0, support for Laravel 10 is removed, so you'll need to use at least Laravel 11.
+
+### Publishing Default Rulesets
+
+Previously, you could publish the default rulesets using a single `config-validator-defaults` tag. However, this made maintenance difficult as Laravel's default config changed between versions. As of v3.0.0, the default rulesets are now published using version-specific tags.
+
+The `config-validator-defaults` publishing tag has been replaced by version-specific tags:
+
+```bash
+# Laravel 11
+php artisan vendor:publish --tag=config-validator-defaults-laravel-11
+
+# Laravel 12
+php artisan vendor:publish --tag=config-validator-defaults-laravel-12
+
+# Laravel 13
+php artisan vendor:publish --tag=config-validator-defaults-laravel-13
+```
 
 ## Upgrading from 1.* to 2.0.0
 
