@@ -13,7 +13,7 @@ return [
 
     Rule::make('disks.local.root')->rules(['string']),
 
-    Rule::make('disks.local.serve')->rules(['boolean']),
+    Rule::make('disks.local.serve')->rules(['nullable', 'boolean']),
 
     Rule::make('disks.local.throw')->rules(['boolean']),
 

@@ -83,7 +83,7 @@ return [
 
     Rule::make('connections.background')->rules(['array']),
 
-    Rule::make('connections.background.driver')->rules(['string']),
+    Rule::make('connections.background.driver')->rules(['nullable', 'string']),
 
     Rule::make('batching')->rules(['array']),
 

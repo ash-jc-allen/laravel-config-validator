@@ -94,6 +94,7 @@ return [
     Rule::make('prefix')->rules(['string']),
 
     Rule::make('serializable_classes')->rules([
+        'nullable',
         static function (string $attribute, mixed $value, Closure $fail): void {
             if (! is_bool($value) && ! is_array($value)) {
                 $fail('The '.$attribute.' field must be a boolean or an array.');

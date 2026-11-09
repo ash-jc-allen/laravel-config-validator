@@ -35,5 +35,5 @@ return [
 
     Rule::make('partitioned')->rules(['boolean']),
 
-    Rule::make('serialization')->rules(['string', 'in:json,php']),
+    Rule::make('serialization')->rules(['nullable', 'string', 'in:json,php']),
 ];
