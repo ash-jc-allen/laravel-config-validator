@@ -37,11 +37,19 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
+          tools: composer:v2
 
       - name: Setup Problem Matches
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Allow Laravel 11 for compatibility testing
+        if: matrix.laravel == '11.*'
+        # Keep advisories visible in audits; allow only Laravel 11 in this CI checkout.
+        run: >-
+          composer config --json policy.advisories.ignore
+          '{"laravel/framework":{"constraint":"^11.0","on-audit":false,"reason":"CI compatibility testing for supported Laravel 11 applications."}}'
 
       - name: Install dependencies
         run: |
